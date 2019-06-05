@@ -14,7 +14,9 @@ gcloud config set project $projectID
 read -p "What do you want to call your new cluster: "  clusterName
 echo "Running the Command 'gcloud container clusters create $clusterName'"
 gcloud container clusters create $clusterName
-
+## Install the grpc service
+echo "Installing the first GRPC Microservice:  'kubectl apply -f deployments/grpcDeployment1/grpc-deployment-1.yaml'"
+kubectl apply -f deployments/grpcDeployment1/grpc-deployment-1.yaml
 ## Install the orchestrator and the load balancer
 echo "Insalling the orchestrator: "
 kubectl apply -f deployments/orchestrator/orchestrator-deployment.yaml

@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: grpc-microservice-1
-          image: mornindew/base-demo-protobuf:latest
+          image: mornindew/grpc-demo-microservice:latest
           command:
             - "./server"
           imagePullPolicy: Always                                                     
