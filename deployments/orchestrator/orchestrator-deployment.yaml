@@ -25,11 +25,11 @@ spec:
             - "./server"
           imagePullPolicy: Always 
           readinessProbe:
-          httpGet:
-              path: /healthz
-              port: 8888
-          initialDelaySeconds: 5
-          periodSeconds: 5                                                     
+            httpGet:
+                path: /healthz
+                port: 8888
+            initialDelaySeconds: 5
+            periodSeconds: 5                                                     
           ports:
           - name: http-api
             containerPort: 8888
@@ -43,10 +43,9 @@ kind: Service
 metadata:
   name: orchestrator-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: orchestrator
   ports:
-  - port: 80
+  - port: 8888
     name: http-auth                  
-    targetPort: 8888

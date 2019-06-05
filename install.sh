@@ -15,7 +15,11 @@ read -p "What do you want to call your new cluster: "  clusterName
 echo "Running the Command 'gcloud container clusters create $clusterName'"
 gcloud container clusters create $clusterName
 
-## Install the orchestrator
+## Install the orchestrator and the load balancer
 echo "Insalling the orchestrator: "
 kubectl apply -f deployments/orchestrator/orchestrator-deployment.yaml
+## Sleep to let the load balancer get an IP
+sleep 10
+kubectl describe services orchestrator-service
+
 

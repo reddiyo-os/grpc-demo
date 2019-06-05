@@ -1,0 +1,14 @@
+version: '2'
+services:
+  app:
+    image: mornindew/grpc-demo-microservice
+    working_dir: /app
+    build:
+     context: .
+     dockerfile: minimal.Dockerfile
+    ports:
+     - "50051:50051"
+    entrypoint:
+     - "./server"
+    network_mode: host  #NOTE: SUPER IMPORTANT - If you don't run host then local docker containers can not benefit from Telepresence
+       

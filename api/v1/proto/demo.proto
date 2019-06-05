@@ -1,0 +1,15 @@
+syntax = "proto3";
+option go_package = "genproto";
+
+
+service ExampleReddiyoGRPCService {
+    rpc ReverseArray (ReverseArrayRequest) returns (ReverseArrayResponse);
+}
+
+message ReverseArrayRequest {
+    repeated float arrayOfNumbers =1;
+}
+
+message ReverseArrayResponse {
+    repeated float reversedArrayOfNumbers =1;
+}
