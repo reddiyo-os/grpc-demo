@@ -1,11 +1,11 @@
 apiVersion: apps/v1beta1 
 kind: Deployment
 metadata:
-  name: orchestrator
+  name: grpc-microservice-1
 spec:
   selector:
     matchLabels:
-      app: orchestrator
+      app: grpc-microservice-1
   replicas: 1 # tells deployment to run 2 pods matching the template
   strategy:
     type: RollingUpdate
@@ -16,22 +16,16 @@ spec:
   template:
     metadata:
       labels:
-        app: orchestrator
+        app: grpc-microservice-1
     spec:
       containers:
-        - name: orchestrator
-          image: mornindew/reddiyo-os-orchestrator-example:latest
+        - name: grpc-microservice-1
+          image: mornindew/base-demo-protobuf:latest
           command:
             - "./server"
-          imagePullPolicy: Always 
-          readinessProbe:
-            httpGet:
-                path: /healthz
-                port: 8888
-            initialDelaySeconds: 5
-            periodSeconds: 5                                                     
+          imagePullPolicy: Always                                                     
           ports:
-          - name: http-port  
+          - name: http-api
             containerPort: 8888
           resources:
             limits:
@@ -41,11 +35,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: orchestrator-service
+  name: grpc-microservice-1
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
-    app: orchestrator
+    app: grpc-microservice-1
   ports:
-  - port: 8888
-    name: http-port                  
+  - port: 50051
+    name: grpc-port                  

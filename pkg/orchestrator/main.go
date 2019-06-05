@@ -22,7 +22,7 @@ func main() {
 	}
 }
 
-var microserviceConnections = []string{"localhost:50051", "localhost:50051", "localhost:50051", "localhost:50051", "localhost:50051"}
+var microserviceConnections = []string{"grpc-microservice-1"}
 
 //grpcClient Connections
 //This is not normally an array but it made the code much less verbose
