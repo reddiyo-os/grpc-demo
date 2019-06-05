@@ -22,7 +22,7 @@ func main() {
 	}
 }
 
-var microserviceConnections = []string{"grpc-microservice-1:50051"}
+var microserviceConnections = []string{"grpc-microservice-1:50051", "grpc-microservice-2:50051", "grpc-microservice-3:50051", "grpc-microservice-4:50051", "grpc-microservice-5:50051"}
 
 //grpcClient Connections
 //This is not normally an array but it made the code much less verbose
