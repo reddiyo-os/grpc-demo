@@ -15,3 +15,7 @@ read -p "What do you want to call your new cluster: "  clusterName
 echo "Running the Command 'gcloud container clusters create $clusterName'"
 gcloud container clusters create $clusterName
 
+## Install the orchestrator
+echo "Insalling the orchestrator: "
+kubectl apply -f deployments/orchestrator/orchestrator-deployment.yaml
+
