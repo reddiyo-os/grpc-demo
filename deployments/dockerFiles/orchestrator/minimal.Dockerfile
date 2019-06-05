@@ -12,7 +12,7 @@ RUN git clone https://github.com/reddiyo-os/grpc-demo.git
 # Gets the necessary dependencies that are called by the code
 RUN cd /go/src/grpc-demo/ && go get ./...
 #COMPILE PARAMETERS TO TELL THE COMPLIER TO STATICALLY LINK THE RUNTIME LIBRARIES INTO THE BINARY
-RUN cd /go/src/grpc-demo/pkg/orcestrator && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o /app/server
+RUN cd /go/src/grpc-demo/pkg/orchestrator && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-extldflags "-static"' -o /app/server
 
 # Buidling the final container from the minimilist image
 FROM scratch
