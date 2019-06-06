@@ -25,11 +25,21 @@ echo "Installing the GRPC Microservice #4:"
 kubectl apply -f deployments/grpcDeployment/grpc-deployment-4.yaml
 echo "Installing the GRPC Microservice #5:"
 kubectl apply -f deployments/grpcDeployment/grpc-deployment-5.yaml
+
+## Install the http services
+echo "Installing the HTTP Microservice #1:"
+kubectl apply -f deployments/httpDeployment/http-deployment-1.yaml
+echo "Installing the HTTP Microservice #2:"
+kubectl apply -f deployments/httpDeployment/http-deployment-2.yaml
+echo "Installing the HTTP Microservice #3:"
+kubectl apply -f deployments/httpDeployment/http-deployment-3.yaml
+echo "Installing the HTTP Microservice #4:"
+kubectl apply -f deployments/httpDeployment/http-deployment-4.yaml
+echo "Installing the HTTP Microservice #5:"
+kubectl apply -f deployments/httpDeployment/http-deployment-5.yaml
 ## Install the orchestrator and the load balancer
 echo "Insalling the orchestrator: "
 kubectl apply -f deployments/orchestrator/orchestrator-deployment.yaml
-## Sleep to let the load balancer get an IP
-sleep 10
-kubectl describe services orchestrator-service
+echo "ALL Done - the pods and services will take a minute or two to fully deploy"
 
 

@@ -106,9 +106,9 @@ func httpRequestHandler(w http.ResponseWriter, req *http.Request) {
 	}
 	//Perform the microservice calls
 	//This is done by looping through all the connections in the connections Variable
-	for _, conn := range allConnections {
+	for _, service := range httpMicroserviceConnections {
 		//Call the first microservice
-		updatedAudit, err := callGRPCMicroserviceAndReturnAuditTrail(conn, &arrayOfFloats)
+		updatedAudit, err := callHTTPMicroserviceAndReturnAuditTrail(service, &arrayOfFloats)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

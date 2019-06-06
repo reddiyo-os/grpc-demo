@@ -1,0 +1,45 @@
+apiVersion: apps/v1beta1 
+kind: Deployment
+metadata:
+  name: http-microservice-1
+spec:
+  selector:
+    matchLabels:
+      app: http-microservice-1
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 4
+      maxUnavailable: 0%
+  minReadySeconds: 15
+  template:
+    metadata:
+      labels:
+        app: http-microservice-1
+    spec:
+      containers:
+        - name: http-microservice-1
+          image: mornindew/grpc-http-demo-microservice:latest
+          command:
+            - "./server"
+          imagePullPolicy: Always                                                     
+          ports:
+          - name: http-api
+            containerPort: 8888
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "100m"  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-microservice-1
+spec:
+  type: NodePort
+  selector:
+    app: http-microservice-1
+  ports:
+  - port: 8888
+    name: http-port                  
