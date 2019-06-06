@@ -30,10 +30,10 @@ A couple assumptions are made when running the "install.sh" command.
 
 ### Assumptions to run and build locally
 
-Golang installed - https://golang.org/doc/install
-Install GRPC - https://grpc.io/docs/quickstart/go/
-docker - https://docs.docker.com/v17.12/install/
-docker-compose - https://docs.docker.com/compose/install/
+* Golang installed - https://golang.org/doc/install
+* Install GRPC - https://grpc.io/docs/quickstart/go/
+* docker - https://docs.docker.com/v17.12/install/
+* docker-compose - https://docs.docker.com/compose/install/
 
 
 ### Repository Structure
