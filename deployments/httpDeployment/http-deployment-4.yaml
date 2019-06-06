@@ -1,11 +1,11 @@
 apiVersion: apps/v1beta1 
 kind: Deployment
 metadata:
-  name: http-microservice-1
+  name: http-microservice-4
 spec:
   selector:
     matchLabels:
-      app: http-microservice-1
+      app: http-microservice-4
   replicas: 1 # tells deployment to run 2 pods matching the template
   strategy:
     type: RollingUpdate
@@ -16,10 +16,10 @@ spec:
   template:
     metadata:
       labels:
-        app: http-microservice-1
+        app: http-microservice-4
     spec:
       containers:
-        - name: http-microservice-1
+        - name: http-microservice-4
           image: mornindew/grpc-http-demo-microservice:latest
           command:
             - "./server"
@@ -35,11 +35,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: http-microservice-1
+  name: http-microservice-4
 spec:
   type: NodePort
   selector:
-    app: http-microservice-1
+    app: http-microservice-4
   ports:
   - port: 8888
     name: http-port                  
