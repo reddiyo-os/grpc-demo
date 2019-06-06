@@ -1,9 +1,5 @@
 #!/bin/bash
 
-####  ASSUMPTIONS - 
-#####   gcloud installed  - https://cloud.google.com/sdk/gcloud/reference/services/enable
-#####  kubectl installed
-
 ## Get the project ID and the set it as the default
 read -p "Enter the ProjectID for your GCP Project: "  projectID
 echo  $projectID
@@ -14,29 +10,40 @@ gcloud config set project $projectID
 read -p "What do you want to call your new cluster: "  clusterName
 echo "Running the Command 'gcloud container clusters create $clusterName'"
 gcloud container clusters create $clusterName
+echo "Cluster Completed, now installing the services"
+
+
+printf "\n"
 ## Install the grpc service
-echo "Installing the GRPC Microservice #1:"
+echo "Installing All the GRPC Microservices:"
 kubectl apply -f deployments/grpcDeployment/grpc-deployment-1.yaml
-echo "Installing the GRPC Microservice #2:"
+echo "GRPC Microservice 1 Installed"
 kubectl apply -f deployments/grpcDeployment/grpc-deployment-2.yaml
-echo "Installing the GRPC Microservice #3:"
+echo "GRPC Microservice 2 Installed"
 kubectl apply -f deployments/grpcDeployment/grpc-deployment-3.yaml
-echo "Installing the GRPC Microservice #4:"
+echo "GRPC Microservice 3 Installed"
 kubectl apply -f deployments/grpcDeployment/grpc-deployment-4.yaml
-echo "Installing the GRPC Microservice #5:"
+echo "GRPC Microservice 4 Installed"
 kubectl apply -f deployments/grpcDeployment/grpc-deployment-5.yaml
+echo "GRPC Microservice 5 Installed"
+
+printf "\n"
 
 ## Install the http services
-echo "Installing the HTTP Microservice #1:"
+echo "Installing All the HTTP Microservices:"
 kubectl apply -f deployments/httpDeployment/http-deployment-1.yaml
-echo "Installing the HTTP Microservice #2:"
+echo "HTTP Microservice 1 Installed"
 kubectl apply -f deployments/httpDeployment/http-deployment-2.yaml
-echo "Installing the HTTP Microservice #3:"
+echo "HTTP Microservice 2 Installed"
 kubectl apply -f deployments/httpDeployment/http-deployment-3.yaml
-echo "Installing the HTTP Microservice #4:"
+echo "HTTP Microservice 3 Installed"
 kubectl apply -f deployments/httpDeployment/http-deployment-4.yaml
-echo "Installing the HTTP Microservice #5:"
+echo "HTTP Microservice 4 Installed"
 kubectl apply -f deployments/httpDeployment/http-deployment-5.yaml
+echo "HTTP Microservice 5 Installed"
+
+printf "\n"
+
 ## Install the orchestrator and the load balancer
 echo "Insalling the orchestrator: "
 kubectl apply -f deployments/orchestrator/orchestrator-deployment.yaml
