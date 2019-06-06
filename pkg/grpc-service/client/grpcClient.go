@@ -50,9 +50,9 @@ func ConstructClient(location string) (*GrpcServiceClient, error) {
 /*
 ReverseArray - call into the grpcService and will reverse the array
 */
-func (client *GrpcServiceClient) ReverseArray(arrayToReverse []float32) ([]float32, error) {
+func (client *GrpcServiceClient) ReverseArray(arrayToReverse *[]float32) ([]float32, error) {
 	//Precondition Check - I do a precondition check in the client to avoid making a call to the server for anything that isn't well constructed
-	if len(arrayToReverse) == 0 {
+	if arrayToReverse == nil || len(*arrayToReverse) == 0 {
 		return nil, PreconditionError{Msg: "Empty Array"}
 	}
 
@@ -63,7 +63,7 @@ func (client *GrpcServiceClient) ReverseArray(arrayToReverse []float32) ([]float
 	//Construct the protobuf params
 	//We don't let the protobuf structs leak out of the client or the server layer
 	request := &genproto.ReverseArrayRequest{
-		ArrayOfNumbers: arrayToReverse,
+		ArrayOfNumbers: *arrayToReverse,
 	}
 	//Make the call to the server
 	response, err := client.userConn.ReverseArray(ctx, request)

@@ -20,13 +20,13 @@ func TestGrpcClientReverseArray(t *testing.T) {
 		t.Error(err.Error())
 	}
 
-	updatedArray, err := grpcClientConnection.ReverseArray(arrayOfFloats)
+	updatedArray, err := grpcClientConnection.ReverseArray(&arrayOfFloats)
 	if err != nil {
 		t.Error("Error Reversing Array: " + err.Error())
 	}
 
 	//Reverse one more time
-	finalReversed, err := grpcClientConnection.ReverseArray(updatedArray)
+	finalReversed, err := grpcClientConnection.ReverseArray(&updatedArray)
 	if err != nil {
 		t.Error("Error Getting the final array : " + err.Error())
 	}
