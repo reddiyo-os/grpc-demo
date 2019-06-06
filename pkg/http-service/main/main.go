@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/reddiyo-os/grpc-demo/pkg/http-service/service"
+	httpservice "github.com/reddiyo-os/grpc-demo/pkg/http-service/service"
 )
 
 func main() {
@@ -21,7 +21,7 @@ func reverseRequestHandler(w http.ResponseWriter, req *http.Request) {
 	//Decode the request
 	decoder := json.NewDecoder(req.Body)
 	var arrayOfFloats []float32
-	err := decoder.Decode(arrayOfFloats)
+	err := decoder.Decode(&arrayOfFloats)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -45,5 +45,4 @@ func reverseRequestHandler(w http.ResponseWriter, req *http.Request) {
 	}
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(js)
-	w.WriteHeader(http.StatusOK)
 }

@@ -1,0 +1,13 @@
+version: '2'
+services:
+  app:
+    image: mornindew/grpc-http-demo-microservice
+    working_dir: /app
+    build:
+     context: .
+     dockerfile: minimal.Dockerfile
+    ports:
+     - "8888:8888"
+    entrypoint:
+     - "./server"
+    network_mode: host  

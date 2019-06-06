@@ -26,12 +26,12 @@ func TestGrpcClientReverseArray(t *testing.T) {
 	}
 
 	//Reverse one more time
-	finalReversed, err := grpcClientConnection.ReverseArray(&updatedArray)
+	finalReversed, err := grpcClientConnection.ReverseArray(updatedArray)
 	if err != nil {
 		t.Error("Error Getting the final array : " + err.Error())
 	}
 
-	if !reflect.DeepEqual(arrayOfFloats, finalReversed) {
+	if !reflect.DeepEqual(arrayOfFloats, *finalReversed) {
 		t.Error("Arrays Dont Match")
 	}
 }

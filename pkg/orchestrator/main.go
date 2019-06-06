@@ -8,7 +8,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/reddiyo-os/grpc-demo/pkg/grpc-service/client"
+	grpcclient "github.com/reddiyo-os/grpc-demo/pkg/grpc-service/client"
+	httpclient "github.com/reddiyo-os/grpc-demo/pkg/http-service/client"
 )
 
 //Main function that sets up the routes
@@ -22,7 +23,8 @@ func main() {
 	}
 }
 
-var microserviceConnections = []string{"grpc-microservice-1:50051", "grpc-microservice-2:50051", "grpc-microservice-3:50051", "grpc-microservice-4:50051", "grpc-microservice-5:50051"}
+var grpcMicroserviceConnections = []string{"grpc-microservice-1:50051", "grpc-microservice-2:50051", "grpc-microservice-3:50051", "grpc-microservice-4:50051", "grpc-microservice-5:50051"}
+var httpMicroserviceConnections = []string{"http-microservice-1:8888", "http-microservice-2:8888", "http-microservice-3:8888", "http-microservice-4:8888", "http-microservice-5:8888"}
 
 //grpcClient Connections
 //This is not normally an array but it made the code much less verbose
@@ -31,7 +33,7 @@ var allConnections []*grpcclient.GrpcServiceClient
 //The Init will handle constructing the client
 func init() {
 	//Loop through all the microservice connection strings and setup connections
-	for _, value := range microserviceConnections {
+	for _, value := range grpcMicroserviceConnections {
 		//Construct the connection
 		tempConnection, err := grpcclient.ConstructClient(value)
 		if err != nil {
@@ -60,7 +62,7 @@ func grpcRequestHandler(w http.ResponseWriter, req *http.Request) {
 	//This is done by looping through all the connections in the connections Variable
 	for _, conn := range allConnections {
 		//Call the first microservice
-		updatedAudit, err := callMicroserviceAndReturnAuditTrail(conn, &arrayOfFloats)
+		updatedAudit, err := callGRPCMicroserviceAndReturnAuditTrail(conn, &arrayOfFloats)
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
@@ -89,20 +91,76 @@ func grpcRequestHandler(w http.ResponseWriter, req *http.Request) {
 }
 
 func httpRequestHandler(w http.ResponseWriter, req *http.Request) {
-	w.WriteHeader(http.StatusOK)
+	//Get the time we start processing
+	responseStartTime := time.Now()
+	//Construct the main struct
+	auditTrail := &RequestAuditTrail{
+		StartTime: responseStartTime,
+	}
+
+	//Generate random array of floats - only used for testing purposes
+	arrayOfFloats := make([]float32, 50)
+	for i := 0; i < 50; i++ {
+		value := rand.Float32()
+		arrayOfFloats[i] = value
+	}
+	//Perform the microservice calls
+	//This is done by looping through all the connections in the connections Variable
+	for _, conn := range allConnections {
+		//Call the first microservice
+		updatedAudit, err := callGRPCMicroserviceAndReturnAuditTrail(conn, &arrayOfFloats)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		//Append the Audit
+		auditTrail.MSAuditTrail = append(auditTrail.MSAuditTrail, updatedAudit)
+		arrayOfFloats = updatedAudit.ReturnedArray
+	}
+
+	//Get the end time
+	endTime := time.Now()
+	differenceInMicro := endTime.Sub(responseStartTime)
+
+	//Append the duration and the end time
+	auditTrail.DurationInNanos = differenceInMicro.Nanoseconds()
+	auditTrail.EndTime = endTime
+
+	//Convert the struct to JSON
+	js, err := json.Marshal(auditTrail)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(js)
 }
 
 //helper function to call a microserivce and get the results
-func callMicroserviceAndReturnAuditTrail(client *grpcclient.GrpcServiceClient, floatArray *[]float32) (*MicroserviceAuditTrail, error) {
+func callGRPCMicroserviceAndReturnAuditTrail(client *grpcclient.GrpcServiceClient, floatArray *[]float32) (*MicroserviceAuditTrail, error) {
 	startCallTime := time.Now()
 	singleCallAuditTrail := &MicroserviceAuditTrail{}
-	updatedArray, err := client.ReverseArray(*floatArray)
+	updatedArray, err := client.ReverseArray(floatArray)
 	if err != nil {
 		return nil, err
 	}
 	endTime := time.Now()
 	singleCallAuditTrail.DurationOfMicroserviceCall = endTime.Sub(startCallTime).Nanoseconds()
-	singleCallAuditTrail.ReturnedArray = updatedArray
+	singleCallAuditTrail.ReturnedArray = *updatedArray
+	return singleCallAuditTrail, nil
+}
+
+//helper function to call microservice over http - should be identical to "callGRPCMicroserviceAndReturnResults"
+func callHTTPMicroserviceAndReturnAuditTrail(location string, floatArray *[]float32) (*MicroserviceAuditTrail, error) {
+	startCallTime := time.Now()
+	singleCallAuditTrail := &MicroserviceAuditTrail{}
+	updatedArray, err := httpclient.ReverseArrays(location, floatArray)
+	if err != nil {
+		return nil, err
+	}
+	endTime := time.Now()
+	singleCallAuditTrail.DurationOfMicroserviceCall = endTime.Sub(startCallTime).Nanoseconds()
+	singleCallAuditTrail.ReturnedArray = *updatedArray
 	return singleCallAuditTrail, nil
 }
 

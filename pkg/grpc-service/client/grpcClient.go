@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/reddiyo-os/grpc-demo/pkg/grpc-service/genProto"
+	genproto "github.com/reddiyo-os/grpc-demo/pkg/grpc-service/genProto"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -50,7 +50,7 @@ func ConstructClient(location string) (*GrpcServiceClient, error) {
 /*
 ReverseArray - call into the grpcService and will reverse the array
 */
-func (client *GrpcServiceClient) ReverseArray(arrayToReverse *[]float32) ([]float32, error) {
+func (client *GrpcServiceClient) ReverseArray(arrayToReverse *[]float32) (*[]float32, error) {
 	//Precondition Check - I do a precondition check in the client to avoid making a call to the server for anything that isn't well constructed
 	if arrayToReverse == nil || len(*arrayToReverse) == 0 {
 		return nil, PreconditionError{Msg: "Empty Array"}
@@ -82,10 +82,11 @@ func (client *GrpcServiceClient) ReverseArray(arrayToReverse *[]float32) ([]floa
 		}
 	}
 	//REturn the Reversed array - we don't allow the protobuf objects to leave the client
-	return response.GetReversedArrayOfNumbers(), nil
+	reversedArray := response.GetReversedArrayOfNumbers()
+	return &reversedArray, nil
 }
 
-//Error Structs
+//Error Structs -- THese are duplicated intentionally
 
 /*
 PreconditionError - Precondition error
