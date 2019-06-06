@@ -46,6 +46,16 @@ project
 |
 └─── api - folder that stores API Definitions.  In this case it is the proto file for GRPC Microservices
 |
+└─── deployments - all the K8s files and docker files needed to build and deploy into GKE
+|   |
+|   └─── dockerFiles 
+|   |
+|   └─── grpcDeployment 
+|   |
+|   └─── httpDeployment 
+|   |
+|   └─── orchestrator 
+|
 └─── docs - any supporting docs (e.g. Images)
 |
 └─── pkg - golang public packages
