@@ -52,7 +52,7 @@ terraform apply "demoServiceInstall"
 
 #### Delete the cluster
 
-Don't forget to clean up your cluster so that you won't be charged
+Don't forget to clean up your cluster so that you won't be charged.  You need to run terraform destroy from both the infrastructure folder and the app folder.
  ```
  terraform destroy
  ```
