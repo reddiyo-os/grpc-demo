@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: grpc-microservice-1
-  replicas: 1 # tells deployment to run 2 pods matching the template
+  replicas: 1 
   strategy:
     type: RollingUpdate
     rollingUpdate:

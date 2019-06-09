@@ -20,6 +20,54 @@ This is a very simple starter project that will setup a GKE Cluster with 11 Micr
 Arch:
 ![Alt text](docs/images/Reddiyo-OS_Example_GRPC.png?raw=true "Reddiyo-GRPC Arch")
 
+### Terraform Alternative - Preferred Method
+
+Really!?!?!   You want me to use a shell script to install?  Terraform works too.  You need to set up the variables for your environment.
+
+#### Setup Your Variables
+
+Update your variables first so that it points to your GCP Account
+
+```
+deployments/terraform/global/variables
+```
+
+#### Build Your Infrastructure
+
+```
+cd deployments/terraform/infrastructure
+terraform init
+terraform plan -out demoInfrastructure
+terraform apply "demoInfrastructure"
+```
+
+#### Install Microservices
+
+```
+cd deployments/terraform/app
+terraform init
+terraform plan -out demoServiceInstall
+terraform apply "demoServiceInstall"
+```
+
+#### Delete the cluster
+
+Don't forget to clean up your cluster so that you won't be charged
+ ```
+ terraform destroy
+ ```
+
+## Overview
+
+This is a very simple starter project that will setup a GKE Cluster with 11 Microservices.  The actual services don't do much (other than reverse arrays) but it is a good foundation for adding to and playing around with GRPC or HTTP calls with Golang.
+
+* Orchestrator - this is the Service that handles the call from outside the cluster.   It will handle all calls to the internal microservices.
+* GRPC-Serivce-# - these microservices are dedicated to procesing Service Calls over GRPC.  They each have a single function that is exposed.
+* HTTP-Service-# - these microservices do the exact same thing as the GRPC Service with the exception that HTTP is the protocol that is used.
+
+Arch:
+![Alt text](docs/images/Reddiyo-OS_Example_GRPC.png?raw=true "Reddiyo-GRPC Arch")
+
 
 ### Assumptions To Install in GKE
 
@@ -46,7 +94,7 @@ project
 |
 └─── api - folder that stores API Definitions.  In this case it is the proto file for GRPC Microservices
 |
-└─── deployments - all the K8s files and docker files needed to build and deploy into GKE
+└─── deployments - all the K8s files, docker files, or terraform files needed to build and deploy into GKE
 |   |
 |   └─── dockerFiles 
 |   |
@@ -54,7 +102,9 @@ project
 |   |
 |   └─── httpDeployment 
 |   |
-|   └─── orchestrator 
+|   └─── orchestrator
+|   |
+|   └─── terraform  
 |
 └─── docs - any supporting docs (e.g. Images)
 |
