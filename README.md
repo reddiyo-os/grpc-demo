@@ -9,6 +9,8 @@ This command should get you going and do all the installation for you.  Good luc
 ./install.sh
 ```
 
+If you prefer terraform then go to the terraform section of this document.
+
 ## Overview
 
 This is a very simple starter project that will setup a GKE Cluster with 11 Microservices.  The actual services don't do much (other than reverse arrays) but it is a good foundation for adding to and playing around with GRPC or HTTP calls with Golang.
