@@ -1,7 +1,7 @@
 version: '2'
 services:
   app:
-    image: mornindew/grpc-http-demo-microservice
+    image: mornindew/grpc-demo-healthcheck-sidecar
     working_dir: /app
     build:
      context: .

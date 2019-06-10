@@ -121,3 +121,16 @@ Below is the command that is used to compile proto file into GoLang.  This will 
 ```
 protoc -I api/v1/proto --proto_path=$GOPATH api/v1/proto/demo.proto --go_out=plugins=grpc:pkg/grpc-service/genProto
 ```
+
+### Docker Build
+
+You can build your own docker files from the source.   It is easiest to use docker-compose.  You can use the docker-compose.yml to set your params and then pass into the docker file.  Docker Files are located at "deployments/dockerFiles".  All docker builds are "from scratch" and should only be about 10MB
+
+
+Note: If you fork the repository you need to update the docker file to pull from your repository.
+
+
+Command to Build and Run
+```
+docker-compose up
+```
