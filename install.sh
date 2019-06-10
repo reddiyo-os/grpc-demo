@@ -9,7 +9,7 @@ gcloud config set project $projectID
 ## Get the cluster name and create it
 read -p "What do you want to call your new cluster: "  clusterName
 echo "Running the Command 'gcloud container clusters create $clusterName'"
-gcloud container clusters create $clusterName --enable-autoscaling --max-nodes=10 --min-nodes=3
+gcloud container clusters create $clusterName --num-nodes=5
 echo "Cluster Completed, now installing the services"
 
 
