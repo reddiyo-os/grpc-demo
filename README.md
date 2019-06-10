@@ -22,10 +22,10 @@ If you prefer terraform then go to the terraform section of this document.
 
 This is a very simple starter project that will setup a GKE Cluster with 11 Microservices.  The actual services don't do much (other than reverse arrays) but it is a good foundation for adding to and playing around with GRPC or HTTP calls with Golang.
 
-* Orchestrator - this is the Service that handles the call from outside the cluster.   It will handle all calls to the internal microservices.
-* GRPC-Serivce-# - these microservices are dedicated to procesing Service Calls over GRPC.  They each have a single function that is exposed.
-* HTTP-Service-# - these microservices do the exact same thing as the GRPC Service with the exception that HTTP is the protocol that is used.
-* Healthcheck Sidecar - each pod will have a separate container deployed into it that owns the healthchecking of the pod.   It actually doesn't do anything other than return a 200 but the plumbing is there to do deeper healthchecks and readiness checks.
+* **Orchestrator** - this is the Service that handles the call from outside the cluster.   It will handle all calls to the internal microservices.
+* **GRPC-Serivce** - - these microservices are dedicated to procesing Service Calls over GRPC.  They each have a single function that is exposed.
+* **HTTP-Service** - these microservices do the exact same thing as the GRPC Service with the exception that HTTP is the protocol that is used.
+* **Healthcheck Sidecar** - each pod will have a separate container deployed into it that owns the healthchecking of the pod.   It actually doesn't do anything other than return a 200 but the plumbing is there to do deeper healthchecks and readiness checks.
 
 Arch:
 ![Alt text](docs/images/Reddiyo-OS_Example_GRPC.png?raw=true "Reddiyo-GRPC Arch")
