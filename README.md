@@ -1,5 +1,12 @@
 # grpc-demo
-This is a basic sample repo that sets up some microservices using GRPC and also with HTTP.  All code is written in Golang and should be a decent foundation for playing with the different transport protocols.
+This is a basic sample repo that sets up some microservices using GRPC and also with HTTP.  At the end you will have a functioning set of microservices (11 of them) running in your VPC within GKE.  It isn't production ready but is a decent starting point for GRPC (and HTTP) microservices.
+
+Technology Used:
+*  **Golang**
+*  **GKE**
+*  **GRPC**
+*  **Protobuf**
+*  **Terraform**
 
 ## TLDR
 
@@ -18,6 +25,7 @@ This is a very simple starter project that will setup a GKE Cluster with 11 Micr
 * Orchestrator - this is the Service that handles the call from outside the cluster.   It will handle all calls to the internal microservices.
 * GRPC-Serivce-# - these microservices are dedicated to procesing Service Calls over GRPC.  They each have a single function that is exposed.
 * HTTP-Service-# - these microservices do the exact same thing as the GRPC Service with the exception that HTTP is the protocol that is used.
+* Healthcheck Sidecar - each pod will have a separate container deployed into it that owns the healthchecking of the pod.   It actually doesn't do anything other than return a 200 but the plumbing is there to do deeper healthchecks and readiness checks.
 
 Arch:
 ![Alt text](docs/images/Reddiyo-OS_Example_GRPC.png?raw=true "Reddiyo-GRPC Arch")
@@ -134,3 +142,11 @@ Command to Build and Run
 ```
 docker-compose up
 ```
+
+#### Docker Registries with the latest built
+
+* **GRPC Microservice** - https://cloud.docker.com/repository/docker/mornindew/grpc-demo-microservice
+* **HTTP Microservice** - https://cloud.docker.com/repository/docker/mornindew/grpc-http-demo-microservice
+* **Orchestrator Microservice** - https://cloud.docker.com/repository/docker/mornindew/reddiyo-os-orchestrator-example
+* **Healthcheck Sidecar** - https://cloud.docker.com/repository/docker/mornindew/grpc-demo-healthcheck-sidecar
+* **Base GRPC Container** - https://cloud.docker.com/repository/docker/mornindew/base-demo-protobuf
