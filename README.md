@@ -8,6 +8,19 @@ Technology Used:
 *  **Protobuf**
 *  **Terraform**
 *  **Docker** (and docker-compose)
+*  **gcloud**
+*  **kubectl**
+
+## Tech Assumptions
+
+* [GoogleAccount](https://cloud.google.com/billing/docs/how-to/manage-billing-account) - Project to install into
+* [docker](https://docs.docker.com/v17.12/install/)
+* [docker-compose](https://docs.docker.com/compose/install/)
+* [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+* [Golang](https://golang.org/doc/install) - if you want to customize
+* [GRPC](https://grpc.io/docs/quickstart/go/) - if you want to customize
+* [terraform](https://learn.hashicorp.com/terraform/getting-started/install.html) - Optional
+
 
 ## TLDR
 
@@ -37,7 +50,7 @@ Really!?!?!   You want me to use a shell script to install?  Terraform works too
 
 #### Setup Your Variables
 
-Update your variables first so that it points to your GCP Account
+Update your variables first so that it points to your GCP Account.  You will need to download a service account.json and build the relative path to it.  If you don't know how to create a service account go [here](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
 
 ```
 deployments/terraform/global/variables
@@ -48,8 +61,7 @@ deployments/terraform/global/variables
 ```
 cd deployments/terraform/infrastructure
 terraform init
-terraform plan -out demoInfrastructure
-terraform apply "demoInfrastructure"
+terraform apply 
 ```
 
 #### Install Microservices
@@ -57,8 +69,7 @@ terraform apply "demoInfrastructure"
 ```
 cd deployments/terraform/app
 terraform init
-terraform plan -out demoServiceInstall
-terraform apply "demoServiceInstall"
+terraform apply
 ```
 
 #### Delete the cluster
@@ -68,22 +79,8 @@ Don't forget to clean up your cluster so that you won't be charged.  You need to
  terraform destroy
  ```
 
-### Assumptions To Install in GKE
 
-A couple assumptions are made when running the "install.sh" command.
-
-* gcloud installed  - https://cloud.google.com/sdk/gcloud/reference/services/enable
-* Available Project in Google Cloud
-
-### Assumptions to run and build locally
-
-* Golang installed - https://golang.org/doc/install
-* Install GRPC - https://grpc.io/docs/quickstart/go/
-* docker - https://docs.docker.com/v17.12/install/
-* docker-compose - https://docs.docker.com/compose/install/
-
-
-### Repository Structure
+## Repository Structure
 
 ```
 project
@@ -124,6 +121,26 @@ project
 |   |
 |   └─── healthcheck - the healthcheck sidecar
 ```
+
+## Post Build Steps
+
+After the build has completed you will be able to test your endpoints and run them with GRPC or with HTTP.  To do this you need to get the IP Address that google gave to your load balancer.   To do this you need to go to your Google Cloud Console.
+
+1.  Click the Google Cloud Platform Dropdown --> Kubernetes Engine --> Services  
+2.  Get the IP Address From the orchestrator "Load Balancer"
+3.  Run your curls or postman endpoints
+
+Curl using GRPC:
+```
+curl -v http://<YOUR_IP_ADDRESS>:8888/grpc
+```
+
+Curl Using HTTP:
+```
+curl -v http://<YOUR_IP_ADDRESS>:8888/http
+```
+
+## Build Notes and Commands
 
 ### Compile Protobuf
 

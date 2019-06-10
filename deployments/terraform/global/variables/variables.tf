@@ -1,6 +1,6 @@
 
 output "project" {
-  value = "<YOUR PROJECT>"
+  value = "<YOUR_PROJECT_ID>"
   description = "The Google Project ID that you will be installing your cluster into"
 }
 
