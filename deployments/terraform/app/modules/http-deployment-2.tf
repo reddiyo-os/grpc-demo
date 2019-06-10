@@ -21,6 +21,39 @@ resource "kubernetes_deployment" "http_microservice_2" {
 
       spec {
         container {
+          name    = "grpc-health-check"
+          image   = "mornindew/grpc-demo-healthcheck-sidecar:latest"
+          command = ["./server"]
+
+          port {
+            name           = "http-api"
+            container_port = 8080
+          }
+
+          liveness_probe {
+            http_get {
+              path = "/health/liveness"
+              port = "8080"
+            }
+
+            initial_delay_seconds = 5
+            period_seconds        = 3
+          }
+
+          readiness_probe {
+            http_get {
+              path = "/health/readiness"
+              port = "8080"
+            }
+
+            initial_delay_seconds = 5
+            period_seconds        = 5
+            success_threshold     = 1
+          }
+
+          image_pull_policy = "Always"
+        }        
+        container {
           name    = "http-microservice-2"
           image   = "mornindew/grpc-http-demo-microservice:latest"
           command = ["./server"]

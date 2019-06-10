@@ -9,8 +9,8 @@ import (
 func main() {
 	http.HandleFunc("/health/liveness", healthHandler)
 	http.HandleFunc("/health/readiness", readinessHandler)
-	fmt.Println("Handling GRPC HealthCheck on :8888")
-	err := http.ListenAndServe(":8888", nil)
+	fmt.Println("Handling GRPC HealthCheck on :8080")
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal(" Error:: " + err.Error())
 		return

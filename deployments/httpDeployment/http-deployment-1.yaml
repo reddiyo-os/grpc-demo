@@ -18,8 +18,28 @@ spec:
       labels:
         app: http-microservice-1
     spec:
-      containers:
-        - name: http-microservice-1
+        - name: grpc-health-check
+          image: mornindew/grpc-demo-healthcheck-sidecar:latest
+          command:
+            - "./server"
+          imagePullPolicy: Always
+          ports:
+          - name: http-api
+            containerPort: 8080  
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1  
+      - name: http-microservice-1
           image: mornindew/grpc-http-demo-microservice:latest
           command:
             - "./server"

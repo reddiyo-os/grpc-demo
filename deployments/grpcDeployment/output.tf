@@ -1,21 +1,21 @@
-resource "kubernetes_deployment" "http_microservice_1" {
+resource "kubernetes_deployment" "grpc_microservice_1" {
   metadata {
-    name = "http-microservice-1"
+    name = "grpc-microservice-1"
   }
 
   spec {
     replicas = 1
 
     selector {
-      match_labels = {
-        app = "http-microservice-1"
+      match_labels {
+        app = "grpc-microservice-1"
       }
     }
 
     template {
       metadata {
-        labels ={
-          app = "http-microservice-1"
+        labels {
+          app = "grpc-microservice-1"
         }
       }
 
@@ -52,21 +52,22 @@ resource "kubernetes_deployment" "http_microservice_1" {
           }
 
           image_pull_policy = "Always"
-        }        
+        }
+
         container {
-          name    = "http-microservice-1"
-          image   = "mornindew/grpc-http-demo-microservice:latest"
+          name    = "grpc-microservice-1"
+          image   = "mornindew/grpc-demo-microservice:latest"
           command = ["./server"]
 
           port {
             name           = "http-api"
-            container_port = 8888
+            container_port = 50051
           }
 
           resources {
             limits {
-              cpu    = "100m"
               memory = "500Mi"
+              cpu    = "100m"
             }
           }
 
@@ -79,7 +80,7 @@ resource "kubernetes_deployment" "http_microservice_1" {
       type = "RollingUpdate"
 
       rolling_update {
-        max_unavailable = "0"
+        max_unavailable = "0%"
         max_surge       = "4"
       }
     }
@@ -88,19 +89,19 @@ resource "kubernetes_deployment" "http_microservice_1" {
   }
 }
 
-resource "kubernetes_service" "http_microservice_1" {
+resource "kubernetes_service" "grpc_microservice_1" {
   metadata {
-    name = "http-microservice-1"
+    name = "grpc-microservice-1"
   }
 
   spec {
     port {
-      name = "http-port"
-      port = 8888
+      name = "grpc-port"
+      port = 50051
     }
 
-    selector = {
-      app = "http-microservice-1"
+    selector {
+      app = "grpc-microservice-1"
     }
 
     type = "NodePort"

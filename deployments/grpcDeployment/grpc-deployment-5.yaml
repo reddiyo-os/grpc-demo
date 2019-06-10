@@ -19,6 +19,27 @@ spec:
         app: grpc-microservice-5
     spec:
       containers:
+        - name: grpc-health-check
+          image: mornindew/grpc-demo-healthcheck-sidecar:latest
+          command:
+            - "./server"
+          imagePullPolicy: Always
+          ports:
+          - name: http-api
+            containerPort: 8080  
+          livenessProbe:
+            httpGet:
+              path: /health/liveness
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /health/readiness
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1        
         - name: grpc-microservice-5
           image: mornindew/grpc-demo-microservice:latest
           command:
@@ -26,7 +47,7 @@ spec:
           imagePullPolicy: Always                                                     
           ports:
           - name: http-api
-            containerPort: 8888
+            containerPort: 50051
           resources:
             limits:
               memory: "500Mi"

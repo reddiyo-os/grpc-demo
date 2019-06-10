@@ -1,13 +1,13 @@
 version: '2'
 services:
   app:
-    image: mornindew/reddiyo-os-orchestrator-example
+    image: mornindew/grpc-demo-healthcheck-sidecar
     working_dir: /app
     build:
      context: .
      dockerfile: minimal.Dockerfile
     ports:
-     - "8888:8888"
+     - "8080:8080"
     entrypoint:
      - "./server"
-    network_mode: host  
+    network_mode: host 
