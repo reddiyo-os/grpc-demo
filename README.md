@@ -7,6 +7,7 @@ Technology Used:
 *  **GRPC**
 *  **Protobuf**
 *  **Terraform**
+*  **Docker** (and docker-compose)
 
 ## TLDR
 
@@ -120,6 +121,8 @@ project
 |   |   └─── service - the service layer and functions
 |   |
 |   |─── orchestrator - the orchestrator service that handles making both the GRPC and HTTP Calls
+|   |
+|   └─── healthcheck - the healthcheck sidecar
 ```
 
 ### Compile Protobuf
