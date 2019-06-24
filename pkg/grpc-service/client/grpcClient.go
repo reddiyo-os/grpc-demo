@@ -41,7 +41,6 @@ func ConstructClient(location string) (*GrpcServiceClient, error) {
 		userConn: genproto.NewExampleReddiyoGRPCServiceClient(connection),
 		timeout:  time.Second,
 	}
-
 	return constructedClient, nil
 }
 

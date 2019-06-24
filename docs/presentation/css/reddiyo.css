@@ -1,0 +1,77 @@
+/*********************************************
+ * Transition Styles - This didn't work but left it in
+ *********************************************/
+ .fragment.current-visible.visible:not(.current-fragment) {
+    animation: removed-item-animation 1.5s cubic-bezier(0.6, -0.05, 0.9, 0.9) forwards;
+    transform-origin: 0% 100%;
+}
+@keyframes removed-item-animation {
+    0% {
+        opacity: 1;
+        transform: rotateZ(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(900px) rotateZ(70deg);
+        line-height: 0px;
+        display: none;
+    }
+}
+
+#info_new_cont {
+    float: right;
+    display: inline-block;
+    width: 500px;
+    height: 100%;
+    margin: 0px;
+}
+
+#info_new_ul {
+    list-style: none;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+#info_new_ul li {
+    float:left;
+    padding: 5px;
+    color: #000000;
+    font-family: trebuchet ms;
+    font-size: xx-large;
+    font-weight: lighter;
+    text-align: justify;
+    word-wrap:break-word;
+    vertical-align: middle;
+}
+
+.info_new_bottom {
+    margin-top:30px;
+}
+
+#app_no_li {
+    width: 100%;
+    height: 100%;
+    background-color: #00ddff;
+}
+
+#app_no_cont {
+    white-space: nowrap;
+}
+
+#app_no {
+    font-weight: bold;
+}
+
+#new_li {
+    width: 100%;
+    height: 100%;
+    font-size: 30px; 
+}
+
+#ifw_li {
+    width: 120px;
+    height: 120px;
+    background-color: #eee;
+}

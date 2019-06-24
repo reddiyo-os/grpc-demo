@@ -1,15 +1,18 @@
+//Proto version number - should be 3
 syntax = "proto3";
-option go_package = "genproto";
+//Package to provide a unique name and helps with importing
+option go_package = "grpc-demo-proto-v1";
 
-
+//Service Definition
 service ExampleReddiyoGRPCService {
+    //Single Function that Reverses An Array - You do not need to define an error.   GRPC will insert it
     rpc ReverseArray (ReverseArrayRequest) returns (ReverseArrayResponse);
 }
 
+//Message Definitions
 message ReverseArrayRequest {
     repeated float arrayOfNumbers =1;
 }
-
 message ReverseArrayResponse {
     repeated float reversedArrayOfNumbers =1;
 }
