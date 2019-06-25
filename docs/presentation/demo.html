@@ -57,7 +57,7 @@
 				<h1>GRPC</h1>
 				<h3>Experiences and Stumbles</h3>
 				<p><a href="https://github.com/reddiyo-os/grpc-demo">https://github.com/reddiyo-os/grpc-demo</a></p>
-				
+
 				<p><br /><br />
 					<small>Created By:<br />
 						<a href="http://reddiyo.com"><img src="images/reddiyo-logo-reversed.png" /></a><br />
@@ -109,35 +109,42 @@
 				</section>
 				<section>
 					<h3>Protobuf</h3>
-					<ul>
-						<li>Mechanism for serializing structured data</li>
-						<li>Language Agnostic</li>
-						<li>Defines a schema through a proto</li>
-						<li>Tranport mechanism that GRPC Uses</li>
-					</ul>
-					<br>
-					<span data-markdown>
-						```
-						message Person {
-						required string name = 1;
-						required int32 id = 2;
-						optional string email = 3;
+					<table>
+						<tr>
+							<td>
+								<ul>
+									<li>Mechanism for serializing structured data</li>
+									<li>Language Agnostic</li>
+									<li>Defines a schema through a proto</li>
+									<li>Tranport mechanism that GRPC Uses</li>
+								</ul>
+							</td>
+							<td width="60%">
+								<span data-markdown>
+									```
+									message Person {
+									required string name = 1;
+									required int32 id = 2;
+									optional string email = 3;
 
-						enum PhoneType {
-						MOBILE = 0;
-						HOME = 1;
-						WORK = 2;
-						}
+									enum PhoneType {
+									MOBILE = 0;
+									HOME = 1;
+									WORK = 2;
+									}
 
-						message PhoneNumber {
-						required string number = 1;
-						optional PhoneType type = 2 [default = HOME];
-						}
+									message PhoneNumber {
+									required string number = 1;
+									optional PhoneType type = 2 [default = HOME];
+									}
 
-						repeated PhoneNumber phone = 4;
-						}
-						```
-					</span>
+									repeated PhoneNumber phone = 4;
+									}
+									```
+								</span>
+							</td>
+						</tr>
+					</table>
 				</section>
 				<section>
 					<h3>HTTP 2</h3>
@@ -145,8 +152,9 @@
 					<ul>
 						<li>First MAJOR release (2015) of HTTP since 1996</li>
 						<li>Reduced latency and improved security</li>
-						<li>Single TCP Connection</li>
-						<li>Multiplexing</li>
+						<li>Long Lived TCP Connection (A.K.A. Multiplexing)</li>
+						<li>Superior Compression</li>
+						<li>Improved Streaming</li>
 						<li>Binary Protocols</li>
 						<li>Communication Mechanism that GRPC Uses</li>
 					</ul>
@@ -155,12 +163,13 @@
 					<h3>GRPC</h3>
 					<table>
 						<tr>
-							<td width="60%">
+							<td width="40%">
 								<ul>
-									<li>RPC Framework for client server communication</li>
+									<li>Open Source RPC Framework stitching together the core technologies</li>
 									<li>Uses Proto for its Interface Definition Language</li>
 									<li>Default Transport Mechanism is Protobuf</li>
 									<li>Leverages HTTP2 Protocol</li>
+									<li>Easier to build non-RESTful APIs</li>
 								</ul>
 							</td>
 							<td>
@@ -178,7 +187,7 @@
 					<img src="images/Reddiyo-OS_Example_GRPC.png" width="800" height="500" frameBorder="1"></img>
 				</section>
 				<section>
-					<h4>Internals of a Pod</h4>
+					<h4>Internals of Reddiyo Pods</h4>
 					<img src="images/PodInternals.png" width="100%" height="30%" frameBorder="1"></img>
 				</section>
 				<section data-markdown>
@@ -207,7 +216,6 @@
 					<script type="text/template">
 					### Microservice Package Structure
 
-					Each Sub-Folder is its own separate package
 					```
 					|─── grpc-service - the grpc microservice
 					|   └─── client - the client code
@@ -215,6 +223,9 @@
 					|   └─── main - the main server code
 					|   └─── service - the service layer and functions
 					```
+					* Each Sub-Folder is its own separate GO package
+					* Service Layer typically has multiple files (structs, unexported, etc)
+					* Separting Main and Service is optional
 					</script>
 				</section>
 
@@ -403,7 +414,7 @@
 									<li>L4 Load Balancer makes a major assumption</li>
 									<li>Option 1: Handle in the client directly in GRPC</li>
 									<pre>
-										<code class="hljs" data-trim data-line-numbers="3">
+										<code class="hljs" width="100%" data-trim data-line-numbers="3">
 											// Set up a connection to the server.
 											conn, err := grpc.Dial(address, grpc.WithInsecure(),
 											grpc.WithBalancerName(roundrobin.Name))
@@ -423,11 +434,11 @@
 					<h3>Circuit Breaking</h3>
 					<table>
 						<tr>
-							<td width="60%">
+							<td >
 								<ul>
 									<li>Circuit Breaking is still a must in GRPC</li>
 									<li>Expect Failure</li>
-									<li>Option 1: Bake it in the client Code (e.g. H</li>
+									<li>Option 1: Bake it in the client Code (e.g. Hystrix Go)</li>
 									<a href="https://github.com/afex/hystrix-go">https://github.com/afex/hystrix-go</a>
 									<li>Recommended: Use a Service Mesh </li>
 									<a href="https://istio.io/">https://istio.io/</a>
@@ -454,7 +465,7 @@
 				</aside>
 			</section>
 
-			
+
 
 
 
