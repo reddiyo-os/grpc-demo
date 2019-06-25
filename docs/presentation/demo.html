@@ -138,8 +138,9 @@
 						<ul>
 							<li>First MAJOR release (2015) of HTTP since 1996</li>
 							<li>Reduced latency and improved security</li>
-							<li>Single TCP Connection</li>
-							<li>Multiplexing</li>
+							<li>Long Lived TCP Connection (A.K.A. Multiplexing)</li>
+							<li>Superior Compression</li>
+							<li>Improved Streaming</li>	
 							<li>Binary Protocols</li>
 							<li>Communication Mechanism that GRPC Uses</li>
 						</ul>
@@ -150,10 +151,11 @@
 					<div class="column-wrapper"></div>
 					<div class="bullets-left">
 						<ul>
-							<li>RPC Framework for client server communication</li>
+							<li>Open Source RPC Framework stitching together the core technologies</li>
 							<li>Uses Proto for its Interface Definition Language</li>
 							<li>Default Transport Mechanism is Protobuf</li>
 							<li>Leverages HTTP2 Protocol</li>
+							<li>Easier to build non-RESTful APIs</li>
 						</ul>
 					</div>
 					<div class="image-right">
@@ -169,7 +171,7 @@
 					<p><a href="https://github.com/reddiyo-os/grpc-demo">https://github.com/reddiyo-os/grpc-demo</a></p>
 				</section>
 				<section>
-					<h4>Internals of a Pod</h4>
+					<h4>Internals of Reddiyo Pods</h4>
 					<img src="images/PodInternals.png" width="100%" height="30%" frameBorder="1"></img>
 				</section>
 				<section data-markdown>
@@ -198,7 +200,6 @@
 					<script type="text/template">
 					### Microservice Package Structure
 
-					Each Sub-Folder is its own separate package
 					```
 					|─── grpc-service - the grpc microservice
 					|   └─── client - the client code
@@ -206,6 +207,10 @@
 					|   └─── main - the main server code
 					|   └─── service - the service layer and functions
 					```
+					* Each Sub-Folder is its own separate GO package
+					* Service Layer typically has multiple files (structs, unexported, etc)
+					* Separting Main and Service is optional
+
 					</script>
 				</section>
 
