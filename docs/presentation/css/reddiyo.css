@@ -75,3 +75,15 @@
     height: 120px;
     background-color: #eee;
 }
+
+#title-slide a {
+    color: #fff;
+}
+
+#title-slide img {
+    margin: 15px 0px;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    width: 200px;
+}

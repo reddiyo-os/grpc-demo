@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/reveal.css">
 	<link rel="stylesheet" href="css/reddiyo.css">
-	<link rel="stylesheet" href="css/theme/blood.css" id="theme">
+	<link rel="stylesheet" href="css/theme/reddiyo.css" id="theme">
 
 
 	<!-- Theme used for syntax highlighting of code -->
@@ -53,23 +53,20 @@
 
 		<!-- Any section element inside of this container is displayed as a slide -->
 		<div class="slides">
-			<section data-background="images/reddiyo-logo.png" data-background-size="30%"
-				data-background-position="top 30px left 15px" data-transition="concave">
-
-
-				<!--<p id="borderimg2"><img data-src="images/reddiyo-logo.png" id="img"></p>
-					-->
+			<section id="title-slide" data-transition="concave">
 				<h1>GRPC</h1>
 				<h3>Experiences and Stumbles</h3>
-				<p>https://github.com/reddiyo-os/grpc-demo</p>
-				<p>
-					<small>Created by <a href="http://reddiyo.com">Craig Martin</a> and <a
-							href="http://reddiyo.com">Reddiyo</a></small>
+				<p><a href="https://github.com/reddiyo-os/grpc-demo">https://github.com/reddiyo-os/grpc-demo</a></p>
+				
+				<p><br /><br />
+					<small>Created By:<br />
+						<a href="http://reddiyo.com"><img src="images/reddiyo-logo-reversed.png" /></a><br />
+						Craig Martin, CEO and Co-Founder</small>
 				</p>
 			</section>
 
-			<section data-background="images/reddiyo-logo.png" data-background-size="10%"
-				data-background-position="top 15px left 8px" data-transition="concave">
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<h2>GRPC is Better</h2>
 				<span class="fragment fade-in-then-out" data-fragment-index="1">
 					This will be a short talk, everyone knows that GRPC is vastly superior to HTTP.
@@ -92,13 +89,11 @@
 						</tr>
 					</table>
 				</span>
-
-
 			</section>
 
 			<!-- Example of nested vertical slides -->
-			<section data-background="images/reddiyo-logo.png" data-background-size="10%"
-				data-background-position="top 15px left 8px" data-transition="concave">
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<section>
 					<h3>Core Concepts To Fully Understand GRPC</h3>
 					<!-- For Reasons that I don't understand the valign is not working -->
@@ -175,8 +170,8 @@
 					</table>
 				</section>
 			</section>
-			<section data-background="images/reddiyo-logo.png" data-background-size="10%"
-				data-background-position="top 15px left 8px" data-transition="concave">
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<section>
 					<h4>Working Example</h4>
 					<a href="https://github.com/reddiyo-os/grpc-demo">https://github.com/reddiyo-os/grpc-demo</a>
@@ -188,7 +183,7 @@
 				</section>
 				<section data-markdown>
 					<script type="text/template">
-						### Project and Repsitory Structure
+						### Project and Repository Structure
 						```
 						project
 						|
@@ -225,8 +220,8 @@
 
 			</section>
 
-			<section data-background="images/reddiyo-logo.png" data-background-size="10%"
-				data-background-position="top 15px left 8px" data-transition="concave">
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<section>
 					<h4>Proto Patterns</h4>
 					<table>
@@ -263,8 +258,8 @@
 
 			</section>
 
-			<section data-background="images/reddiyo-logo.png" data-background-size="10%"
-				data-background-position="top 15px left 8px" data-transition="concave">
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<h4>Main Packages</h4>
 				<table>
 					<thead>
@@ -304,8 +299,8 @@
 					Show the main, show the constructor
 				</aside>
 			</section>
-			<section data-background="images/reddiyo-logo.png" data-background-size="10%"
-				data-background-position="top 15px left 8px" data-transition="concave">
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<h4>Microservice Logic Layer Package</h4>
 				<table>
 					<thead>
@@ -337,8 +332,8 @@
 					Discuss Separation of Code Concerns
 				</aside>
 			</section>
-			<section data-background="images/reddiyo-logo.png" data-background-size="10%"
-				data-background-position="top 15px left 8px" data-transition="concave">
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<h4>Client Package</h4>
 				<table>
 					<thead>
@@ -385,8 +380,8 @@
 			</section>
 
 			<!-- Example of nested vertical slides -->
-			<section data-background="images/reddiyo-logo.png" data-background-size="10%"
-				data-background-position="top 15px left 8px" data-transition="concave">
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<section>
 					<h3>Random Notes and Lessons Learned</h3>
 					<!-- For Reasons that I don't understand the valign is not working -->
