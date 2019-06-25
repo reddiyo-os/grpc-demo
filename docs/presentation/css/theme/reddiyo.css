@@ -129,6 +129,11 @@ body {
   display: block;
   margin-left: 40px; }
 
+.reveal li {
+  line-height: 1;
+  margin-bottom: .4em;
+}
+
 .reveal dt {
   font-weight: bold; }
 
@@ -184,17 +189,24 @@ body {
 .reveal table th {
   font-size: .7em;
   font-weight: bold;
+  color: #88BDBC;
 }
 
 .reveal table td {
   font-size: .6em;
 }
 
+table.striping tbody tr:nth-child(odd) {
+  background-color: rgba(136, 189, 188, 0.1);
+}
+
+
+
 .reveal table th,
 .reveal table td {
   text-align: left;
-  padding: 0.2em 0.5em 0.2em 0.5em;
-  border-bottom: 1px solid; }
+  padding: 0.4em;
+  }
 
 .reveal table th[align="center"],
 .reveal table td[align="center"] {

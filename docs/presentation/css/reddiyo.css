@@ -87,3 +87,55 @@
     box-shadow: none;
     width: 200px;
 }
+
+.column-wrapper {
+    display: block; 
+    clear:both; 
+}
+
+.image-left {
+    width: 30%;
+    float: left
+}
+
+.image-right {
+    width: 40%;
+    float: left
+}
+
+.reveal .image-left img,
+.reveal .image-right img  {
+    margin-top: 6px;
+}
+
+.bullets-left {
+    width: 57%;
+    float: left;
+    margin-right: 3%;
+    font-size: .75em;
+}
+
+.bullets-right {
+    width: 65%;
+    float: left;
+    margin-left: 3%
+}
+
+.solo-bullets {
+    margin-top: 1.5em;
+}
+
+.compact-bullets {
+    font-size: .7em;
+}
+
+.data-table td {
+ padding: 10px 10px;
+}
+
+.reveal .solo-bullets pre {
+    margin: 0;
+    width: 80%;
+    font-size: 0.7em;
+    box-shadow: none;
+}

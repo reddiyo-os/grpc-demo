@@ -72,22 +72,16 @@
 					This will be a short talk, everyone knows that GRPC is vastly superior to HTTP.
 				</span>
 
-				<span class="fragment" data-fragment-index="2">
-					<table style="width:100%">
-						<tr>
-							<td style="width:30%">
-								<img src="images/ronBurgandy.gif" width="100%" height="90%" frameBorder="0"></img>
-							</td>
-							<td>
-								<ul>
-									<li> Better understanding of GRPC (and components)</li>
-									<li> Working example</li>
-									<li> Patterns and Anti-Patterns</li>
-									<li> When to use it </li>
-								</ul>
-							</td>
-						</tr>
-					</table>
+				<span class="fragment column-wrapper" data-fragment-index="2" style="margin-top: -10%">
+					<div class="image-left"><img src="images/ronBurgandy.gif" width="100%" frameBorder="0"></img></div>
+					<div class="bullets-right">
+						<ul>
+							<li> Better understanding of GRPC (and components)</li>
+							<li> Working example</li>
+							<li> Patterns and Anti-Patterns</li>
+							<li> When to use it </li>
+						</ul>
+					</div>
 				</span>
 			</section>
 
@@ -96,20 +90,18 @@
 				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<section>
 					<h3>Core Concepts To Fully Understand GRPC</h3>
-					<!-- For Reasons that I don't understand the valign is not working -->
-					<br>
-					<br>
-					<ul>
-						<li>Protobuf</li>
-						<li> HTTP 2 - as it relates to GRPC</li>
-						<li> GRPC </li>
-						</li>
-					</ul>
+					<div class="solo-bullets">
+						<ul>
+							<li>Protobuf</li>
+							<li>HTTP 2 - as it relates to GRPC</li>
+							<li>GRPC</li>
+						</ul>
+					</div>
 
 				</section>
 				<section>
 					<h3>Protobuf</h3>
-					<ul>
+					<ul class="compact-bullets">
 						<li>Mechanism for serializing structured data</li>
 						<li>Language Agnostic</li>
 						<li>Defines a schema through a proto</li>
@@ -119,63 +111,62 @@
 					<span data-markdown>
 						```
 						message Person {
-						required string name = 1;
-						required int32 id = 2;
-						optional string email = 3;
+							required string name = 1;
+							required int32 id = 2;
+							optional string email = 3;
 
-						enum PhoneType {
-						MOBILE = 0;
-						HOME = 1;
-						WORK = 2;
-						}
+							enum PhoneType {
+								MOBILE = 0;
+								HOME = 1;
+								WORK = 2;
+							}
 
-						message PhoneNumber {
-						required string number = 1;
-						optional PhoneType type = 2 [default = HOME];
-						}
+							message PhoneNumber {
+								required string number = 1;
+								optional PhoneType type = 2 [default = HOME];
+							}
 
-						repeated PhoneNumber phone = 4;
+							repeated PhoneNumber phone = 4;
 						}
 						```
 					</span>
 				</section>
 				<section>
 					<h3>HTTP 2</h3>
-					<h4>Enough to wet the palate</h4>
-					<ul>
-						<li>First MAJOR release (2015) of HTTP since 1996</li>
-						<li>Reduced latency and improved security</li>
-						<li>Single TCP Connection</li>
-						<li>Multiplexing</li>
-						<li>Binary Protocols</li>
-						<li>Communication Mechanism that GRPC Uses</li>
-					</ul>
+					<h5>Enough to wet the palate</h5>
+					<div class="solo-bullets">
+						<ul>
+							<li>First MAJOR release (2015) of HTTP since 1996</li>
+							<li>Reduced latency and improved security</li>
+							<li>Single TCP Connection</li>
+							<li>Multiplexing</li>
+							<li>Binary Protocols</li>
+							<li>Communication Mechanism that GRPC Uses</li>
+						</ul>
+					</div>
 				</section>
 				<section>
 					<h3>GRPC</h3>
-					<table>
-						<tr>
-							<td width="60%">
-								<ul>
-									<li>RPC Framework for client server communication</li>
-									<li>Uses Proto for its Interface Definition Language</li>
-									<li>Default Transport Mechanism is Protobuf</li>
-									<li>Leverages HTTP2 Protocol</li>
-								</ul>
-							</td>
-							<td>
-								<img src="images/GRPC_Overview.png" width="100%" height="30%" frameBorder="0"></img>
-							</td>
-						</tr>
-					</table>
+					<div class="column-wrapper"></div>
+					<div class="bullets-left">
+						<ul>
+							<li>RPC Framework for client server communication</li>
+							<li>Uses Proto for its Interface Definition Language</li>
+							<li>Default Transport Mechanism is Protobuf</li>
+							<li>Leverages HTTP2 Protocol</li>
+						</ul>
+					</div>
+					<div class="image-right">
+						<img src="images/GRPC_Overview.png" width="100%" frameBorder="0"></img>
+					</div>
 				</section>
 			</section>
 			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
 				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<section>
 					<h4>Working Example</h4>
-					<a href="https://github.com/reddiyo-os/grpc-demo">https://github.com/reddiyo-os/grpc-demo</a>
 					<img src="images/Reddiyo-OS_Example_GRPC.png" width="800" height="500" frameBorder="1"></img>
+					<p><a href="https://github.com/reddiyo-os/grpc-demo">https://github.com/reddiyo-os/grpc-demo</a></p>
 				</section>
 				<section>
 					<h4>Internals of a Pod</h4>
@@ -224,7 +215,7 @@
 				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<section>
 					<h4>Proto Patterns</h4>
-					<table>
+					<table class="striping">
 						<thead>
 							<tr>
 								<th>Pattern</th>
@@ -233,7 +224,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>User the scalar types when possible</td>
+								<td>Use the scalar types when possible</td>
 								<td>Always favor the lightweight</td>
 							</tr>
 							<tr>
@@ -261,7 +252,7 @@
 			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
 				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<h4>Main Packages</h4>
-				<table>
+				<table class="striping">
 					<thead>
 						<tr>
 							<th>Pattern</th>
@@ -302,7 +293,7 @@
 			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
 				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<h4>Microservice Logic Layer Package</h4>
-				<table>
+				<table class="striping">
 					<thead>
 						<tr>
 							<th>Pattern</th>
@@ -335,7 +326,7 @@
 			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
 				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<h4>Client Package</h4>
-				<table>
+				<table class="striping">
 					<thead>
 						<tr>
 							<th>Pattern</th>
@@ -384,58 +375,47 @@
 				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<section>
 					<h3>Random Notes and Lessons Learned</h3>
-					<!-- For Reasons that I don't understand the valign is not working -->
-					<br>
-					<br>
-					<ul>
-						<li>Load Balancing</li>
-						<li>Circuit Breaking</li>
-						<li>Never Make Backwards Incompatable Change</li>
-					</ul>
-
+					<div class="solo-bullets">
+						<ul>
+							<li>Load Balancing</li>
+							<li>Circuit Breaking</li>
+							<li>Never Make Backwards Incompatable Change</li>
+						</ul>
+					</div>
 				</section>
 				<section>
 					<h3>Load Balancer</h3>
-					<table>
-						<tr>
-							<td>
-								<ul>
-									<li>L4 Load Balancer makes a major assumption</li>
-									<li>Option 1: Handle in the client directly in GRPC</li>
-									<pre>
-										<code class="hljs" data-trim data-line-numbers="3">
-											// Set up a connection to the server.
-											conn, err := grpc.Dial(address, grpc.WithInsecure(),
-											grpc.WithBalancerName(roundrobin.Name))
-											if err != nil {
-												log.Fatalf("did not connect: %v", err)
-											}
-											defer conn.Close()								
-										</code>
-									</pre>
-									<li>Recommended: Use a sidecar or service mesh</li>
-								</ul>
-							</td>
-						</tr>
-					</table>
+					<div class="solo-bullets">
+						<ul>
+							<li>L4 Load Balancer makes a major assumption</li>
+							<li>Option 1: Handle in the client directly in GRPC</li>
+							<pre>
+								<code class="hljs" data-trim data-line-numbers="3">
+									// Set up a connection to the server.
+									conn, err := grpc.Dial(address, grpc.WithInsecure(),
+									grpc.WithBalancerName(roundrobin.Name))
+									if err != nil {
+										log.Fatalf("did not connect: %v", err)
+									}
+									defer conn.Close()								
+								</code>
+							</pre>
+							<li>Recommended: Use a sidecar or service mesh</li>
+						</ul>
+					</div>
 				</section>
 				<section>
 					<h3>Circuit Breaking</h3>
-					<table>
-						<tr>
-							<td width="60%">
-								<ul>
-									<li>Circuit Breaking is still a must in GRPC</li>
-									<li>Expect Failure</li>
-									<li>Option 1: Bake it in the client Code (e.g. H</li>
-									<a href="https://github.com/afex/hystrix-go">https://github.com/afex/hystrix-go</a>
-									<li>Recommended: Use a Service Mesh </li>
-									<a href="https://istio.io/">https://istio.io/</a>
-								</ul>
-							</td>
-
-						</tr>
-					</table>
+					<div class="solo-bullets">
+						<ul>
+							<li>Circuit Breaking is still a must in GRPC</li>
+							<li>Expect Failure</li>
+							<li>Option 1: Bake it in the client Code (e.g. <br />
+							<a href="https://github.com/afex/hystrix-go">https://github.com/afex/hystrix-go</a></li>
+							<li>Recommended: Use a Service Mesh <br />
+							<a href="https://istio.io/">https://istio.io/</a></li>
+						</ul>
+					</div>
 				</section>
 			</section>
 
