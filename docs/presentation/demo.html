@@ -134,17 +134,23 @@
 				<section>
 					<h3>HTTP 2</h3>
 					<h5>Enough to wet the palate</h5>
-					<div class="solo-bullets">
-						<ul>
-							<li>First MAJOR release (2015) of HTTP since 1996</li>
-							<li>Reduced latency main motivator</li>
-							<li>Superior Compression</li>
-							<li>Binary Protocols</li>
-							<li>Improved Streaming</li>	
-							<li>Server Push</li>
-							<li>Long Lived TCP Connection (A.K.A. Multiplexing)</li>
-							<li>Communication Mechanism that GRPC Uses</li>
-						</ul>
+					<div class='col-wrapper'>
+						<div class="col50">
+							<ul>
+								<li>First MAJOR release (2015) of HTTP since 1996</li>
+								<li>Reduced latency main motivator</li>
+								<li>Superior Compression</li>
+								<li>Binary Protocols</li>
+							</ul>
+						</div>
+						<div class="col50">
+							<ul>
+								<li>Improved Streaming</li>	
+								<li>Server Push</li>
+								<li>Long Lived TCP Connection (A.K.A. Multiplexing)</li>
+								<li>Communication Mechanism that GRPC Uses</li>
+							</ul>
+						</div>
 					</div>
 				</section>
 				<section>
@@ -378,7 +384,7 @@
 			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
 				data-background-position="bottom 15px left 15px" data-transition="concave">
 				<section>
-					<h3>Random Notes and Lessons Learned</h3>
+					<h4>Random Notes &amp; Lessons Learned</h4>
 					<div class="solo-bullets">
 						<ul>
 							<li>Load Balancing</li>
@@ -388,8 +394,8 @@
 					</div>
 				</section>
 				<section>
-					<h3>GRPC Just Broke Your Load Balancer</h3>
-					<div class="solo-bullets">
+					<h4>GRPC Just Broke Your Load Balancer</h4>
+					<div class="solo-bullets narrow-bullets">
 						<ul>
 							<li>L4 Load Balancer makes a major assumption</li>
 							<li>Option 1: Handle in the client directly in GRPC</li>

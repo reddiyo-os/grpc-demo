@@ -80,6 +80,10 @@
     color: #fff;
 }
 
+#title-slide h3 {
+    color: #88BDBC;
+}
+
 #title-slide img {
     margin: 15px 0px;
     background: none;
@@ -125,6 +129,12 @@
     margin-top: 1.5em;
 }
 
+.solo-bullets.narrow-bullets {
+    font-size: .8em;
+    margin: 1.5em auto 0;
+    width: 80%;
+}
+
 .compact-bullets {
     font-size: .7em;
 }
@@ -138,4 +148,18 @@
     width: 80%;
     font-size: 0.7em;
     box-shadow: none;
+}
+
+.col-wrapper:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.col50 {
+    float: right;
+    width: 48%;
+}
+.col50:first-child {
+    float: left;
 }
