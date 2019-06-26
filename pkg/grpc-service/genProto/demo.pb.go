@@ -35,7 +35,7 @@ func (m *ReverseArrayRequest) Reset()         { *m = ReverseArrayRequest{} }
 func (m *ReverseArrayRequest) String() string { return proto.CompactTextString(m) }
 func (*ReverseArrayRequest) ProtoMessage()    {}
 func (*ReverseArrayRequest) Descriptor() ([]byte, []int) {
-	return fileDescriptor_demo_80990bc9650ff04f, []int{0}
+	return fileDescriptor_demo_4eea92a24f90ff37, []int{0}
 }
 func (m *ReverseArrayRequest) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ReverseArrayRequest.Unmarshal(m, b)
@@ -73,7 +73,7 @@ func (m *ReverseArrayResponse) Reset()         { *m = ReverseArrayResponse{} }
 func (m *ReverseArrayResponse) String() string { return proto.CompactTextString(m) }
 func (*ReverseArrayResponse) ProtoMessage()    {}
 func (*ReverseArrayResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_demo_80990bc9650ff04f, []int{1}
+	return fileDescriptor_demo_4eea92a24f90ff37, []int{1}
 }
 func (m *ReverseArrayResponse) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_ReverseArrayResponse.Unmarshal(m, b)
@@ -179,9 +179,9 @@ var _ExampleReddiyoGRPCService_serviceDesc = grpc.ServiceDesc{
 	Metadata: "demo.proto",
 }
 
-func init() { proto.RegisterFile("demo.proto", fileDescriptor_demo_80990bc9650ff04f) }
+func init() { proto.RegisterFile("demo.proto", fileDescriptor_demo_4eea92a24f90ff37) }
 
-var fileDescriptor_demo_80990bc9650ff04f = []byte{
+var fileDescriptor_demo_4eea92a24f90ff37 = []byte{
 	// 178 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0x4a, 0x49, 0xcd, 0xcd,
 	0xd7, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x57, 0xb2, 0xe5, 0x12, 0x0e, 0x4a, 0x2d, 0x4b, 0x2d, 0x2a,

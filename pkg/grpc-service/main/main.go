@@ -23,7 +23,6 @@ func (s *server) ReverseArray(ctx context.Context, in *grpc_demo_proto_v1.Revers
 	//Get the array from the protobuf
 	arrayOfNumbers := in.GetArrayOfNumbers()
 	//reverse it
-
 	reversedArray, err := grpcservice.ReverseArray(arrayOfNumbers)
 	if err != nil {
 		fmt.Println("Error Reversing Array: " + err.Error())

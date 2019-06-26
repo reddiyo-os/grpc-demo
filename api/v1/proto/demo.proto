@@ -16,6 +16,7 @@ service ExampleReddiyoGRPCService {
 message ReverseArrayRequest {
     repeated float arrayOfNumbers =1;
 }
+
 message ReverseArrayResponse {
     repeated float reversedArrayOfNumbers =1;
 }

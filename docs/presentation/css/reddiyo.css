@@ -99,7 +99,7 @@
 }
 
 .image-right {
-    width: 40%;
+    width: 50%;
     float: left
 }
 
@@ -109,7 +109,7 @@
 }
 
 .bullets-left {
-    width: 57%;
+    width: 45%;
     float: left;
     margin-right: 3%;
     font-size: .75em;

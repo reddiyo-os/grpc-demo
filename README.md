@@ -147,7 +147,7 @@ curl -v http://<YOUR_IP_ADDRESS>:8888/http
 Below is the command that is used to compile proto file into GoLang.  This will need to be run from the root.
 
 ```
-protoc -I api/v1/proto --proto_path=$GOPATH api/v1/proto/demo.proto --go_out=plugins=grpc:pkg/grpc-service/genProto
+protoc -I api/v1/proto  api/v1/proto/demo.proto --go_out=plugins=grpc:pkg/grpc-service/genProto
 ```
 
 ### Docker Build
