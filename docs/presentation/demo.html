@@ -111,22 +111,22 @@
 					<span data-markdown>
 						```
 						message Person {
-							required string name = 1;
-							required int32 id = 2;
-							optional string email = 3;
+						required string name = 1;
+						required int32 id = 2;
+						optional string email = 3;
 
-							enum PhoneType {
-								MOBILE = 0;
-								HOME = 1;
-								WORK = 2;
-							}
+						enum PhoneType {
+						MOBILE = 0;
+						HOME = 1;
+						WORK = 2;
+						}
 
-							message PhoneNumber {
-								required string number = 1;
-								optional PhoneType type = 2 [default = HOME];
-							}
+						message PhoneNumber {
+						required string number = 1;
+						optional PhoneType type = 2 [default = HOME];
+						}
 
-							repeated PhoneNumber phone = 4;
+						repeated PhoneNumber phone = 4;
 						}
 						```
 					</span>
@@ -145,7 +145,7 @@
 						</div>
 						<div class="col50">
 							<ul>
-								<li>Improved Streaming</li>	
+								<li>Improved Streaming</li>
 								<li>Server Push</li>
 								<li>Long Lived TCP Connection (A.K.A. Multiplexing)</li>
 								<li>Communication Mechanism that GRPC Uses</li>
@@ -421,26 +421,26 @@
 							<li>Circuit Breaking is still a must in GRPC</li>
 							<li>Expect Failure</li>
 							<li>Option 1: Bake it in the client Code (e.g. Hystix) <br />
-							<a href="https://github.com/afex/hystrix-go">https://github.com/afex/hystrix-go</a></li>
+								<a href="https://github.com/afex/hystrix-go">https://github.com/afex/hystrix-go</a></li>
 							<li>Recommended: Use a Service Mesh <br />
-							<a href="https://istio.io/">https://istio.io/</a></li>
+								<a href="https://istio.io/">https://istio.io/</a></li>
 						</ul>
 					</div>
 				</section>
 				<section>
-						<h3>Down Sides</h3>
-						<div class="solo-bullets">
-							<ul>
-								<li>Browsers are very good at JSON</li>
-								<li>Tooling isn't mature (especially at the browser level)</li>
-								<li>Human Readable has its upsides</li>
-								<li>Different language for defining API</li>
-								<li>Monolithic code generation is hard (but not as hard as OpenAPI)</li>
-								<li>Performance improvements only show up at higher loads</li>
+					<h3>Down Sides</h3>
+					<div class="solo-bullets">
+						<ul>
+							<li>Browsers are very good at JSON</li>
+							<li>Tooling isn't mature (especially at the browser level)</li>
+							<li>Human Readable has its upsides</li>
+							<li>Different language for defining API</li>
+							<li>Monolithic code generation is hard (but not as hard as OpenAPI)</li>
+							<li>Performance improvements only show up at higher loads</li>
 
-							</ul>
-						</div>
-					</section>
+						</ul>
+					</div>
+				</section>
 			</section>
 
 			<section>
@@ -458,36 +458,43 @@
 				</aside>
 			</section>
 
+			<section>
+				<h2>Any Questions</h2>
+				<p><img src="images/glyph-logo_May2016.png" alt="Instagram" height="42" width="42"> #goReddiyo </p>
+				<p><img src="images/Twitter_Logo_WhiteOnImage.png" alt="Instagram" height="42" width="42"> @Reddiyo </p>
+
+			</section>
 
 
 
 
 
-	<script src="js/reveal.js"></script>
 
-	<script>
+			<script src="js/reveal.js"></script>
 
-		// More info https://github.com/hakimel/reveal.js#configuration
-		Reveal.initialize({
-			controls: true,
-			progress: true,
-			center: true,
-			hash: true,
+			<script>
 
-			transition: 'slide', // none/fade/slide/convex/concave/zoom
+				// More info https://github.com/hakimel/reveal.js#configuration
+				Reveal.initialize({
+					controls: true,
+					progress: true,
+					center: true,
+					hash: true,
 
-			// More info https://github.com/hakimel/reveal.js#dependencies
-			dependencies: [
-				{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-				{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
-				{ src: 'plugin/highlight/highlight.js', async: true },
-				{ src: 'plugin/search/search.js', async: true },
-				{ src: 'plugin/zoom-js/zoom.js', async: true },
-				{ src: 'plugin/notes/notes.js', async: true }
-			]
-		});
+					transition: 'slide', // none/fade/slide/convex/concave/zoom
 
-	</script>
+					// More info https://github.com/hakimel/reveal.js#dependencies
+					dependencies: [
+						{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+						{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+						{ src: 'plugin/highlight/highlight.js', async: true },
+						{ src: 'plugin/search/search.js', async: true },
+						{ src: 'plugin/zoom-js/zoom.js', async: true },
+						{ src: 'plugin/notes/notes.js', async: true }
+					]
+				});
+
+			</script>
 
 </body>
 

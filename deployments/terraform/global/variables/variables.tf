@@ -1,6 +1,6 @@
 
 output "project" {
-  value = "<YOUR_PROJECT_ID>"
+  value = "homeproject-231004"
   description = "The Google Project ID that you will be installing your cluster into"
 }
 
@@ -15,7 +15,7 @@ output "credentials" {
 }
 
 output "clusterName" {
-  value = "grpc-demo-cluster"
+  value = "grpc-demo--backup-cluster"
   description = "the name of the cluster."
 }
 
