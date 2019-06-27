@@ -15,7 +15,7 @@ resource "google_container_cluster" "gke-cluster" {
   network            = "${module.global_variables.network}"
   location           = "${module.global_variables.vpcLocation}"
 
-  initial_node_count = 7
+  initial_node_count = 5
   //Get your credentials for the newly created cluster so that microservices can be deployed
     provisioner "local-exec" {
     command = "gcloud config set project ${module.global_variables.project}"
