@@ -163,3 +163,21 @@
 .col50:first-child {
     float: left;
 }
+
+.reveal .social-icons {
+    margin-top: 1em;
+}
+
+.social-icons li {
+    clear: both;
+    list-style: none;
+}
+
+.reveal .social-icons img {
+    display: block;
+    float: left;
+    margin: 4px .5em 0 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+}

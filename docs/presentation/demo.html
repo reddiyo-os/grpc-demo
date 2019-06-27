@@ -105,28 +105,28 @@
 						<li>Open Source Mechanism for serializing structured data</li>
 						<li>Language Agnostic</li>
 						<li>Defines a schema through a proto</li>
-						<li>Tranport mechanism that GRPC Uses</li>
+						<li>Transport mechanism that GRPC Uses</li>
 					</ul>
 					<br>
 					<span data-markdown>
 						```
 						message Person {
-						required string name = 1;
-						required int32 id = 2;
-						optional string email = 3;
+							required string name = 1;
+							required int32 id = 2;
+							optional string email = 3;
 
-						enum PhoneType {
-						MOBILE = 0;
-						HOME = 1;
-						WORK = 2;
-						}
+							enum PhoneType {
+								MOBILE = 0;
+								HOME = 1;
+								WORK = 2;
+							}
 
-						message PhoneNumber {
-						required string number = 1;
-						optional PhoneType type = 2 [default = HOME];
-						}
+							message PhoneNumber {
+								required string number = 1;
+								optional PhoneType type = 2 [default = HOME];
+							}
 
-						repeated PhoneNumber phone = 4;
+							repeated PhoneNumber phone = 4;
 						}
 						```
 					</span>
@@ -218,7 +218,7 @@
 					```
 					* Each Sub-Folder is its own separate GO package
 					* Service Layer typically has multiple files (structs, unexported, etc)
-					* Separting Main and Service is optional
+					* Separating Main and Service is optional
 
 					</script>
 				</section>
@@ -280,7 +280,7 @@
 						</tr>
 						<tr>
 							<td>Bounded Context of Protobufs</td>
-							<td>Fully Decouples transport layer from business logic</td>
+							<td>Fully decouples transport layer from business logic</td>
 						</tr>
 						<tr>
 							<td>Use Standard Protobuf Errors</td>
@@ -316,19 +316,19 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>Protobuf Structures don't pass into this layer</td>
+							<td>Protobuf structures don't pass into this layer</td>
 							<td>Keeps separation of transport from business logic</td>
 						</tr>
 						<tr>
-							<td>All Unit Testing is at the microservice layer</td>
+							<td>All unit testing is at the microservice layer</td>
 							<td>Allows unit tests to focus entirely on business logic</td>
 						</tr>
 						<tr>
-							<td>All Exported Functions return errors</td>
+							<td>All exported functions return errors</td>
 							<td>Allows transport layer to handle errors</td>
 						</tr>
 						<tr>
-							<td>Only Export what you have to</td>
+							<td>Only export what you have to</td>
 							<td>Quarantines the microservice code</td>
 						</tr>
 					</tbody>
@@ -349,11 +349,11 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>Contain the Connection data in a struct</td>
+							<td>Contain the connection data in a struct</td>
 							<td>Makes it easy to reuse and control</td>
 						</tr>
 						<tr>
-							<td>Use a Constructor to generate the connection</td>
+							<td>Use a constructor to generate the connection</td>
 							<td>Isolates how to create the connections</td>
 						</tr>
 						<tr>
@@ -365,11 +365,11 @@
 							<td>Helps to ensure that backwards compatability is maintained</td>
 						</tr>
 						<tr>
-							<td>Don't allow protobuf to go beyond the client</td>
+							<td>Don't allow Protobuf to go beyond the client</td>
 							<td>Separates transport protocol layer from business logic</td>
 						</tr>
 						<tr>
-							<td>Convert Protobuf Error Codes to Shared Errors</td>
+							<td>Convert Protobuf error codes to shared errors</td>
 							<td>Helps that downstream systems will not have to be transport aware</td>
 						</tr>
 
@@ -459,10 +459,12 @@
 			</section>
 
 			<section>
-				<h2>Any Questions</h2>
-				<p><img src="images/glyph-logo_May2016.png" alt="Instagram" height="42" width="42"> #goReddiyo </p>
-				<p><img src="images/Twitter_Logo_WhiteOnImage.png" alt="Instagram" height="42" width="42"> @Reddiyo </p>
-
+				<h2>Any Questions?</h2>
+				<ul class="social-icons">
+					<li><img src="images/instagram.png" alt="Instagram" height="42" width="42"> @GoReddiyo </li>
+					<li><img src="images/twitter.png" alt="Twitter" height="42" width="42"> @Reddiyo </li>
+					<li><img src="images/facebook.png" alt="Facebook" height="42" width="42"> @Reddiyo </li>
+				</ul>
 			</section>
 
 
