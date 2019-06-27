@@ -7,6 +7,7 @@ import (
 	"net"
 
 	"github.com/reddiyo-os/grpc-demo/pkg/grpc-service/genProto"
+
 	"github.com/reddiyo-os/grpc-demo/pkg/grpc-service/service"
 
 	"google.golang.org/grpc"
@@ -17,7 +18,7 @@ import (
 // server is used to implement the GRPC Service
 type server struct{}
 
-func (s *server) ReverseArray(ctx context.Context, in *genproto.ReverseArrayRequest) (*genproto.ReverseArrayResponse, error) {
+func (s *server) ReverseArray(ctx context.Context, in *grpc_demo_proto_v1.ReverseArrayRequest) (*grpc_demo_proto_v1.ReverseArrayResponse, error) {
 
 	//Get the array from the protobuf
 	arrayOfNumbers := in.GetArrayOfNumbers()
@@ -34,7 +35,7 @@ func (s *server) ReverseArray(ctx context.Context, in *genproto.ReverseArrayRequ
 		}
 	}
 	//Create the response object
-	response := &genproto.ReverseArrayResponse{}
+	response := &grpc_demo_proto_v1.ReverseArrayResponse{}
 	response.ReversedArrayOfNumbers = reversedArray
 	return response, nil
 }
@@ -48,7 +49,7 @@ func main() {
 	}
 	s := grpc.NewServer()
 	//Load the protobuf definition
-	genproto.RegisterExampleReddiyoGRPCServiceServer(s, &server{})
+	grpc_demo_proto_v1.RegisterExampleReddiyoGRPCServiceServer(s, &server{})
 
 	err = s.Serve(lis)
 	if err != nil {

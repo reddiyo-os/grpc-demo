@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>GRPC - How Reddiyo Uses It</title>
+
+	<meta name="description" content="A short presentation on GRPC and how we use it in our cloud environment.">
+	<meta name="author" content="Craig Martin">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/reddiyo.css">
+	<link rel="stylesheet" href="css/theme/reddiyo.css" id="theme">
+
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+
+	<!-- Custom Style Sheets-->
+	<style type="text/css">
+		reddiyobackgroundimage {
+			display: block;
+			margin-left: 50px;
+			margin-right: 50px;
+			width: 40%;
+		}
+	</style>
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section id="title-slide" data-transition="concave">
+				<h1>GRPC</h1>
+				<h3>Experiences and Stumbles</h3>
+				<p><a href="https://github.com/reddiyo-os/grpc-demo">https://github.com/reddiyo-os/grpc-demo</a></p>
+
+				<p><br /><br />
+					<small>Created By:<br />
+						<a href="http://reddiyo.com"><img src="images/reddiyo-logo-reversed.png" /></a><br />
+						Craig Martin, CEO and Co-Founder</small>
+				</p>
+			</section>
+
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
+				<h2>GRPC is Better</h2>
+				<span class="fragment fade-in-then-out" data-fragment-index="1">
+					This will be a short talk, everyone knows that GRPC is vastly superior to HTTP.
+				</span>
+
+				<span class="fragment column-wrapper" data-fragment-index="2" style="margin-top: -10%">
+					<div class="image-left"><img src="images/ronBurgandy.gif" width="100%" frameBorder="0"></img></div>
+					<div class="bullets-right">
+						<ul>
+							<li> Better understanding of GRPC (and components)</li>
+							<li> Working example</li>
+							<li> Patterns and Anti-Patterns</li>
+							<li> When to use it </li>
+						</ul>
+					</div>
+				</span>
+			</section>
+
+			<!-- Example of nested vertical slides -->
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
+				<section>
+					<h3>Core Concepts To Fully Understand GRPC</h3>
+					<div class="solo-bullets">
+						<ul>
+							<li>Protobuf</li>
+							<li>HTTP 2 - as it relates to GRPC</li>
+							<li>GRPC</li>
+						</ul>
+					</div>
+
+				</section>
+				<section>
+					<h3>Protobuf</h3>
+					<ul class="compact-bullets">
+						<li>Open Source Mechanism for serializing structured data</li>
+						<li>Language Agnostic</li>
+						<li>Defines a schema through a proto</li>
+						<li>Transport mechanism that GRPC Uses</li>
+					</ul>
+					<br>
+					<span data-markdown>
+						```
+						message Person {
+							required string name = 1;
+							required int32 id = 2;
+							optional string email = 3;
+
+							enum PhoneType {
+								MOBILE = 0;
+								HOME = 1;
+								WORK = 2;
+							}
+
+							message PhoneNumber {
+								required string number = 1;
+								optional PhoneType type = 2 [default = HOME];
+							}
+
+							repeated PhoneNumber phone = 4;
+						}
+						```
+					</span>
+				</section>
+				<section>
+					<h3>HTTP 2</h3>
+					<h5>Enough to wet the palate</h5>
+					<div class='col-wrapper'>
+						<div class="col50">
+							<ul>
+								<li>First MAJOR release (2015) of HTTP since 1996</li>
+								<li>Reduced latency main motivator</li>
+								<li>Superior Compression</li>
+								<li>Binary Protocols</li>
+							</ul>
+						</div>
+						<div class="col50">
+							<ul>
+								<li>Improved Streaming</li>
+								<li>Server Push</li>
+								<li>Long Lived TCP Connection (A.K.A. Multiplexing)</li>
+								<li>Communication Mechanism that GRPC Uses</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>GRPC</h3>
+					<div class="column-wrapper"></div>
+					<div class="bullets-left">
+						<ul>
+							<li>Open Source RPC Framework</li>
+							<li>Many Languages Supported (Go, C++, Java, etc)</li>
+							<li>Uses Proto for its Interface Definition Language</li>
+							<li>Code Generation for Messages and Functions</li>
+							<li>Default Transport Mechanism is Protobuf</li>
+							<li>Leverages HTTP2 Protocol</li>
+							<li>Easier to build non-RESTful APIs</li>
+						</ul>
+					</div>
+					<div class="image-right">
+						<img src="images/GRPC_Overview.png" width="100%" frameBorder="0"></img>
+					</div>
+				</section>
+			</section>
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
+				<section>
+					<h4>Working Example</h4>
+					<img src="images/Reddiyo-OS_Example_GRPC.png" width="800" height="500" frameBorder="1"></img>
+					<p><a href="https://github.com/reddiyo-os/grpc-demo">https://github.com/reddiyo-os/grpc-demo</a></p>
+				</section>
+				<section>
+					<h4>Internals of Reddiyo Pods</h4>
+					<img src="images/PodInternals.png" width="100%" height="30%" frameBorder="1"></img>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+						### Project and Repository Structure
+						```
+						project
+						|
+						└─── api - folder that stores API Definitions.  In this case it is the proto file for GRPC Microservices
+						|
+						└─── deployments - all the K8s files, docker files, or terraform files needed to build and deploy into GKE
+						|
+						└─── pkg - golang public packages
+						|   |
+						|   |─── grpc-service - the grpc microservice
+						|   |
+						|   |─── http-service - the http microservice
+						|   |
+						|   |─── orchestrator - the orchestrator service that handles making both the GRPC and HTTP Calls
+						|   |
+						|   └─── healthcheck - the healthcheck sidecar
+						```
+						</script>
+				</section>
+				<section data-markdown>
+					<script type="text/template">
+					### Microservice Package Structure
+
+					```
+					|─── grpc-service - the grpc microservice
+					|   └─── client - the client code
+					|   └─── genProto - any generated Protobuf files
+					|   └─── main - the main server code
+					|   └─── service - the service layer and functions
+					```
+					* Each Sub-Folder is its own separate GO package
+					* Service Layer typically has multiple files (structs, unexported, etc)
+					* Separating Main and Service is optional
+
+					</script>
+				</section>
+
+			</section>
+
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
+				<section>
+					<h4>Proto Patterns</h4>
+					<table class="striping">
+						<thead>
+							<tr>
+								<th>Pattern</th>
+								<th>Rationale</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Use the scalar types when possible</td>
+								<td>Always favor the lightweight</td>
+							</tr>
+							<tr>
+								<td>Use Enums when possible</td>
+								<td>Data Integrity</td>
+							</tr>
+							<tr>
+								<td>Version your Proto files</td>
+								<td>Helps with Client Version Management</td>
+							</tr>
+							<tr>
+								<td>Do not reuse variable numbers</td>
+								<td>Ensures backwards compatability</td>
+							</tr>
+						</tbody>
+					</table>
+					<aside class="notes">
+						Show the Proto File, Compile the Proto, Show the Generated Proto File, show the client
+						constructor, show the server registration
+					</aside>
+				</section>
+
+			</section>
+
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
+				<h4>Main Packages</h4>
+				<table class="striping">
+					<thead>
+						<tr>
+							<th>Pattern</th>
+							<th>Rationale</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Catastrophic Failures</td>
+							<td>No point in starting if you cannot get main running</td>
+						</tr>
+						<tr>
+							<td>Bounded Context of Protobufs</td>
+							<td>Fully decouples transport layer from business logic</td>
+						</tr>
+						<tr>
+							<td>Use Standard Protobuf Errors</td>
+							<td>Simplicity and Consistency</td>
+						</tr>
+						<tr>
+							<td>Owns full instantiation of the service layer</td>
+							<td>Singleness of purpose</td>
+						</tr>
+						<tr>
+							<td>Use the Getters and Setters</td>
+							<td>Keeps data integrity</td>
+						</tr>
+						<tr>
+							<td>Never Send Nils - use empty package</td>
+							<td>Protobuf cannot handle nil</td>
+						</tr>
+					</tbody>
+				</table>
+				<aside class="notes">
+					Show the main, show the constructor
+				</aside>
+			</section>
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
+				<h4>Microservice Logic Layer Package</h4>
+				<table class="striping">
+					<thead>
+						<tr>
+							<th>Pattern</th>
+							<th>Rationale</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Protobuf structures don't pass into this layer</td>
+							<td>Keeps separation of transport from business logic</td>
+						</tr>
+						<tr>
+							<td>All unit testing is at the microservice layer</td>
+							<td>Allows unit tests to focus entirely on business logic</td>
+						</tr>
+						<tr>
+							<td>All exported functions return errors</td>
+							<td>Allows transport layer to handle errors</td>
+						</tr>
+						<tr>
+							<td>Only export what you have to</td>
+							<td>Quarantines the microservice code</td>
+						</tr>
+					</tbody>
+				</table>
+				<aside class="notes">
+					Discuss Separation of Code Concerns
+				</aside>
+			</section>
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
+				<h4>Client Package</h4>
+				<table class="striping">
+					<thead>
+						<tr>
+							<th>Pattern</th>
+							<th>Rationale</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Contain the connection data in a struct</td>
+							<td>Makes it easy to reuse and control</td>
+						</tr>
+						<tr>
+							<td>Use a constructor to generate the connection</td>
+							<td>Isolates how to create the connections</td>
+						</tr>
+						<tr>
+							<td>Initialize connections as part of startup</td>
+							<td>Want the client to fail if it cannot get a connection</td>
+						</tr>
+						<tr>
+							<td>Integration tests reside with the client and are owned by the consumer</td>
+							<td>Helps to ensure that backwards compatability is maintained</td>
+						</tr>
+						<tr>
+							<td>Don't allow Protobuf to go beyond the client</td>
+							<td>Separates transport protocol layer from business logic</td>
+						</tr>
+						<tr>
+							<td>Convert Protobuf error codes to shared errors</td>
+							<td>Helps that downstream systems will not have to be transport aware</td>
+						</tr>
+
+					</tbody>
+				</table>
+				<aside class="notes">
+					Discuss Separation of Code Concerns
+				</aside>
+			</section>
+
+			<!-- Example of nested vertical slides -->
+			<section data-background="images/reddiyo-logo-reversed.png" data-background-size="10%"
+				data-background-position="bottom 15px left 15px" data-transition="concave">
+				<section>
+					<h4>Random Notes &amp; Lessons Learned</h4>
+					<div class="solo-bullets">
+						<ul>
+							<li>Load Balancing</li>
+							<li>Circuit Breaking</li>
+							<li>Down Sides</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<h4>GRPC Just Broke Your Load Balancer</h4>
+					<div class="solo-bullets narrow-bullets">
+						<ul>
+							<li>L4 Load Balancer makes a major assumption</li>
+							<li>Option 1: Handle in the client directly in GRPC</li>
+							<pre>
+								<code class="hljs" data-trim data-line-numbers="3">
+									// Set up a connection to the server.
+									conn, err := grpc.Dial(address, grpc.WithInsecure(),
+									grpc.WithBalancerName(roundrobin.Name))
+									if err != nil {
+										log.Fatalf("did not connect: %v", err)
+									}
+									defer conn.Close()								
+								</code>
+							</pre>
+							<li>Recommended: Use a sidecar or service mesh</li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<h3>Circuit Breaking</h3>
+					<div class="solo-bullets">
+						<ul>
+							<li>Circuit Breaking is still a must in GRPC</li>
+							<li>Expect Failure</li>
+							<li>Option 1: Bake it in the client Code (e.g. Hystix) <br />
+								<a href="https://github.com/afex/hystrix-go">https://github.com/afex/hystrix-go</a></li>
+							<li>Recommended: Use a Service Mesh <br />
+								<a href="https://istio.io/">https://istio.io/</a></li>
+						</ul>
+					</div>
+				</section>
+				<section>
+					<h3>Down Sides</h3>
+					<div class="solo-bullets">
+						<ul>
+							<li>Browsers are very good at JSON</li>
+							<li>Tooling isn't mature (especially at the browser level)</li>
+							<li>Human Readable has its upsides</li>
+							<li>Different language for defining API</li>
+							<li>Monolithic code generation is hard (but not as hard as OpenAPI)</li>
+							<li>Performance improvements only show up at higher loads</li>
+
+						</ul>
+					</div>
+				</section>
+			</section>
+
+			<section>
+				<h2>In Conclusion</h2>
+				<ul>
+
+					<li>GRPC is a solid choice for lightweight client server communication (Languange Agnostic,
+						Type Secure, and backwards compatable)</li>
+					<li>Great fit for service mesh in your microservices</li>
+					<li>Benefits from strong architectual patterns and decoupling</li>
+				</ul>
+
+				<aside class="notes">
+					This slide has fragments which are also stepped through in the notes window.
+				</aside>
+			</section>
+
+			<section>
+				<h2>Any Questions?</h2>
+				<ul class="social-icons">
+					<li><img src="images/instagram.png" alt="Instagram" height="42" width="42"> @GoReddiyo </li>
+					<li><img src="images/twitter.png" alt="Twitter" height="42" width="42"> @Reddiyo </li>
+					<li><img src="images/facebook.png" alt="Facebook" height="42" width="42"> @Reddiyo </li>
+				</ul>
+			</section>
+
+
+
+
+
+
+			<script src="js/reveal.js"></script>
+
+			<script>
+
+				// More info https://github.com/hakimel/reveal.js#configuration
+				Reveal.initialize({
+					controls: true,
+					progress: true,
+					center: true,
+					hash: true,
+
+					transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+					// More info https://github.com/hakimel/reveal.js#dependencies
+					dependencies: [
+						{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+						{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+						{ src: 'plugin/highlight/highlight.js', async: true },
+						{ src: 'plugin/search/search.js', async: true },
+						{ src: 'plugin/zoom-js/zoom.js', async: true },
+						{ src: 'plugin/notes/notes.js', async: true }
+					]
+				});
+
+			</script>
+
+</body>
+
+</html>

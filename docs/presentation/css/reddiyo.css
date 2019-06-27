@@ -1,0 +1,183 @@
+/*********************************************
+ * Transition Styles - This didn't work but left it in
+ *********************************************/
+ .fragment.current-visible.visible:not(.current-fragment) {
+    animation: removed-item-animation 1.5s cubic-bezier(0.6, -0.05, 0.9, 0.9) forwards;
+    transform-origin: 0% 100%;
+}
+@keyframes removed-item-animation {
+    0% {
+        opacity: 1;
+        transform: rotateZ(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(900px) rotateZ(70deg);
+        line-height: 0px;
+        display: none;
+    }
+}
+
+#info_new_cont {
+    float: right;
+    display: inline-block;
+    width: 500px;
+    height: 100%;
+    margin: 0px;
+}
+
+#info_new_ul {
+    list-style: none;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+#info_new_ul li {
+    float:left;
+    padding: 5px;
+    color: #000000;
+    font-family: trebuchet ms;
+    font-size: xx-large;
+    font-weight: lighter;
+    text-align: justify;
+    word-wrap:break-word;
+    vertical-align: middle;
+}
+
+.info_new_bottom {
+    margin-top:30px;
+}
+
+#app_no_li {
+    width: 100%;
+    height: 100%;
+    background-color: #00ddff;
+}
+
+#app_no_cont {
+    white-space: nowrap;
+}
+
+#app_no {
+    font-weight: bold;
+}
+
+#new_li {
+    width: 100%;
+    height: 100%;
+    font-size: 30px; 
+}
+
+#ifw_li {
+    width: 120px;
+    height: 120px;
+    background-color: #eee;
+}
+
+#title-slide a {
+    color: #fff;
+}
+
+#title-slide h3 {
+    color: #88BDBC;
+}
+
+#title-slide img {
+    margin: 15px 0px;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    width: 200px;
+}
+
+.column-wrapper {
+    display: block; 
+    clear:both; 
+}
+
+.image-left {
+    width: 30%;
+    float: left
+}
+
+.image-right {
+    width: 50%;
+    float: left
+}
+
+.reveal .image-left img,
+.reveal .image-right img  {
+    margin-top: 6px;
+}
+
+.bullets-left {
+    width: 45%;
+    float: left;
+    margin-right: 3%;
+    font-size: .75em;
+}
+
+.bullets-right {
+    width: 65%;
+    float: left;
+    margin-left: 3%
+}
+
+.solo-bullets {
+    margin-top: 1.5em;
+}
+
+.solo-bullets.narrow-bullets {
+    font-size: .8em;
+    margin: 1.5em auto 0;
+    width: 80%;
+}
+
+.compact-bullets {
+    font-size: .7em;
+}
+
+.data-table td {
+ padding: 10px 10px;
+}
+
+.reveal .solo-bullets pre {
+    margin: 0;
+    width: 80%;
+    font-size: 0.7em;
+    box-shadow: none;
+}
+
+.col-wrapper:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.col50 {
+    float: right;
+    width: 48%;
+}
+.col50:first-child {
+    float: left;
+}
+
+.reveal .social-icons {
+    margin-top: 1em;
+}
+
+.social-icons li {
+    clear: both;
+    list-style: none;
+}
+
+.reveal .social-icons img {
+    display: block;
+    float: left;
+    margin: 4px .5em 0 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+}
